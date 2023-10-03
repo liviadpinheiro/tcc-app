@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/react/types-6-0'
+import { StoryFn, Meta } from '@storybook/react'
 
 import { Button } from './Button'
 
@@ -7,10 +7,18 @@ export default {
   component: Button
 } as Meta
 
-const Template: Story<typeof Button> = (args) => <Button {...args} />
+const Template: StoryFn<typeof Button> = (args) => <Button {...args} />
 
 export const Primary = Template.bind({})
 
 Primary.args = {
-  text: 'Button'
+  text: 'Button',
+  variant: 'primary'
+}
+
+export const Secondary = Template.bind({})
+
+Secondary.args = {
+  text: 'Button',
+  variant: 'secondary'
 }

@@ -1,27 +1,33 @@
+import { defineStyleConfig } from '@chakra-ui/react'
 import colors from '../foundations/colors'
 
-const Button = {
+const Button = defineStyleConfig({
   baseStyle: {
-    bgColor: `${colors.primary} !important`,
     display: 'flex',
     padding: '0.625rem 1rem',
-    justifyContent: 'center',
-    alignItems: 'center',
-    // gap: '0.625rem',
-    height: '!important 36px',
     borderRadius: '4px',
     fontFamily: 'DM Sans',
     textAlign: 'center',
-    // whiteSpace: 'pre-wrap',
-    // fontSynthesis: 'none',
-    color: colors.neutral.white,
-    // fontStyle: 'normal',
+    fontWeight: '500',
     fontSize: '16px'
-    // letterSpacing: '0px',
-    // textDecoration: 'none',
-    // textTransform: 'capitalize',
-    // margin: '0px 0px 0px 10px'
+  },
+  variants: {
+    primary: {
+      bgColor: colors.primary.default,
+      color: colors.neutral.white,
+      _hover: {
+        bgColor: colors.primary.hover
+      }
+    },
+    secondary: {
+      bgColor: colors.neutral.white,
+      color: colors.primary.default,
+      border: `1px solid ${colors.neutral.black}`,
+      _hover: {
+        bgColor: colors.neutral.lightGray
+      }
+    }
   }
-}
+})
 
 export default Button
