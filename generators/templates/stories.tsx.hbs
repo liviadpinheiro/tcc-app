@@ -1,4 +1,4 @@
-import { Story, Meta } from '@storybook/react/types-6-0'
+import { StoryFn, Meta } from '@storybook/react'
 
 import { {{pascalCase name}} } from '.'
 
@@ -7,4 +7,8 @@ export default {
   component: {{pascalCase name}}
 } as Meta
 
-export const Default: Story = (args) => <{{pascalCase name}} {...args} />
+export const Template: StoryFn = (args) => <{{pascalCase name}} {...args} />
+
+export const Primary = Template.bind({})
+
+Primary.args = {}

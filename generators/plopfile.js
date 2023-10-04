@@ -40,12 +40,6 @@ module.exports = (plop) => {
         path: '../src/components/{{pascalCase type}}/{{pascalCase name}}/{{pascalCase name}}.test.tsx',
         templateFile: 'templates/test.tsx.hbs'
       },
-      {
-        type: 'append',
-        path: '../src/components/{{type}}/index.jsx',
-        pattern: `/* PLOP_INJECT_IMPORT */`,
-        template: 'templates/index-append.tsx.hbs'
-      }
     ]
   })
 }

@@ -13,18 +13,18 @@ const Button = defineStyleConfig({
   },
   variants: {
     primary: {
-      bgColor: colors.primary.default,
-      color: colors.neutral.white,
+      bgColor: 'primary.default',
+      color: 'neutral.white',
       _hover: {
-        bgColor: colors.primary.hover
+        bgColor: 'primary.hover'
       }
     },
     secondary: {
-      bgColor: colors.neutral.white,
-      color: colors.primary.default,
-      border: `1px solid ${colors.neutral.black}`,
+      bgColor: 'neutral.white',
+      color: 'primary.default',
+      border: '1px solid var(--chakra-colors-neutral-black)',
       _hover: {
-        bgColor: colors.neutral.lightGray
+        bgColor: 'neutral.lightGray'
       }
     }
   }

@@ -1,7 +1,6 @@
-import { Button as ChakraButton } from '@chakra-ui/react'
-import { HTMLChakraProps } from '@chakra-ui/system'
+import { Button as ChakraButton, ButtonProps as ChakraButtonProps } from '@chakra-ui/react'
 
-export interface ButtonProps extends HTMLChakraProps<'button'> {
+export interface ButtonProps extends ChakraButtonProps {
   text?: string
   variant?: string
 }
