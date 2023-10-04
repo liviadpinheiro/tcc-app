@@ -1,4 +1,4 @@
-import { defineStyleConfig } from "@chakra-ui/react"
+import { defineStyleConfig } from '@chakra-ui/react'
 
 const FormLabel = defineStyleConfig({
   baseStyle: {
@@ -6,8 +6,8 @@ const FormLabel = defineStyleConfig({
     color: 'neutral.black',
     fontSize: ['12px', '16px'],
     fontFamily: 'DM Sans',
-    fontWeight: '500'
-  }
+    fontWeight: '500',
+  },
 })
 
 export default FormLabel

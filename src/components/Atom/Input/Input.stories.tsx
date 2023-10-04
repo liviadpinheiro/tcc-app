@@ -5,7 +5,7 @@ import { CustomHideIcon } from '../../../../public/icons/hide'
 
 export default {
   title: 'Atom/Input',
-  component: Input
+  component: Input,
 } as Meta
 
 const Template: StoryFn = (args) => <Input {...args} />
@@ -14,14 +14,14 @@ export const Primary = Template.bind({})
 
 Primary.args = {
   label: 'E-mail',
-  placeholder: 'maria@silva.com'
+  placeholder: 'maria@silva.com',
 }
 
 export const Calendar = Template.bind({})
 
 Calendar.args = {
   label: 'Data de Nascimento',
-  type: 'date'
+  type: 'date',
 }
 
 export const Password = Template.bind({})

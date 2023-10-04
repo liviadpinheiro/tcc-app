@@ -1,13 +1,12 @@
-import { defineStyleConfig } from "@chakra-ui/react"
-import { customCalendarIcon } from "../icons/calendar"
+import { defineStyleConfig } from '@chakra-ui/react'
 
 const Input = defineStyleConfig({
   baseStyle: {
     field: {
       _placeholder: {
         color: 'neutral.darkGray',
-      }
-    }
+      },
+    },
   },
 })
 

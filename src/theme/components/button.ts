@@ -9,25 +9,25 @@ const Button = defineStyleConfig({
     fontFamily: 'DM Sans',
     textAlign: 'center',
     fontWeight: '500',
-    fontSize: '16px'
+    fontSize: '16px',
   },
   variants: {
     primary: {
       bgColor: 'primary.default',
       color: 'neutral.white',
       _hover: {
-        bgColor: 'primary.hover'
-      }
+        bgColor: 'primary.hover',
+      },
     },
     secondary: {
       bgColor: 'neutral.white',
       color: 'primary.default',
       border: '1px solid var(--chakra-colors-neutral-black)',
       _hover: {
-        bgColor: 'neutral.lightGray'
-      }
-    }
-  }
+        bgColor: 'neutral.lightGray',
+      },
+    },
+  },
 })
 
 export default Button

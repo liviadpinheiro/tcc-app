@@ -1,12 +1,12 @@
 import '@fontsource/im-fell-double-pica-sc'
 import '@fontsource/dm-sans'
 
-import type { Preview } from "@storybook/react"
+import type { Preview } from '@storybook/react'
 import theme from '../src/theme'
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
+    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -17,6 +17,6 @@ const preview: Preview = {
       theme,
     },
   },
-};
+}
 
-export default preview;
+export default preview

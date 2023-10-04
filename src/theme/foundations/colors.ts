@@ -1,7 +1,7 @@
 export default {
   primary: {
     default: '#73086C',
-    hover: '#610D5B'
+    hover: '#610D5B',
   },
   secondary: '#F6DE07',
   neutral: {
@@ -9,6 +9,6 @@ export default {
     darkGray: '#8B8B8B',
     gray: '#C9C9C9',
     lightGray: '#E7E7E7',
-    white: '#FFFFFF'
-  }
+    white: '#FFFFFF',
+  },
 }

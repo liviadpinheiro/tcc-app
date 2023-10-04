@@ -24,7 +24,7 @@ const customTheme = {
     Button,
     FormLabel,
     Input,
-  }
+  },
 }
 
 export default extendTheme(customTheme)
