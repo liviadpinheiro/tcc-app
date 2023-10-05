@@ -35,13 +35,15 @@ export const Navbar = ({ variant, pathname, userName }: NavbarProps) => {
       bgColor={'primary.default'}
       w={'100%'}
       py={'24px'}
-      px={['16px', 'unset']}
-      justifyContent={'space-around'}
+      px={{ base: '16px', sm: '32px', md: '96px' }}
+      justifyContent={'space-between'}
       alignItems={'center'}
     >
-      <Link href="/">
-        {navbarType === 'desktop' ? <LogoBgDarkIcon /> : <LogoSoloBgDarkIcon />}
-      </Link>
+      <Flex h={'32px'} alignItems={'center'}>
+        <Link href="/">
+          {navbarType === 'desktop' ? <LogoBgDarkIcon /> : <LogoSoloBgDarkIcon />}
+        </Link>
+      </Flex>
       {navbarType === 'desktop' ? (
         <>
           <Flex gap={'24px'}>
