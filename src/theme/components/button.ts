@@ -27,6 +27,27 @@ const Button = defineStyleConfig({
         bgColor: 'neutral.lightGray',
       },
     },
+    rounded: {
+      borderRadius: '50px',
+      bgColor: 'neutral.white',
+      color: 'primary.default',
+      _hover: {
+        bgColor: 'neutral.lightGray',
+      },
+    },
+  },
+  sizes: {
+    sm: {
+      padding: '5px 16px',
+      fontSize: '16px',
+    },
+    md: {
+      padding: '10px 16px',
+    },
+  },
+  defaultProps: {
+    size: 'md',
+    variant: 'primary',
   },
 })
 

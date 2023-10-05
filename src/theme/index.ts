@@ -8,6 +8,7 @@ import config from './foundations/config'
 import fonts from './foundations/fonts'
 import colors from './foundations/colors'
 import shadows from './foundations/shadows'
+import breakpoints from './foundations/breakpoints'
 
 // Component style overrides
 import Button from './components/button'
@@ -20,6 +21,7 @@ const customTheme = {
   config,
   colors,
   shadows,
+  breakpoints,
   components: {
     Button,
     FormLabel,

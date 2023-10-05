@@ -14,6 +14,7 @@ export const Primary = Template.bind({})
 Primary.args = {
   text: 'Button',
   variant: 'primary',
+  size: 'md',
 }
 
 export const Secondary = Template.bind({})
@@ -21,4 +22,13 @@ export const Secondary = Template.bind({})
 Secondary.args = {
   text: 'Button',
   variant: 'secondary',
+  size: 'md',
+}
+
+export const Rounded = Template.bind({})
+
+Rounded.args = {
+  text: 'Button',
+  variant: 'rounded',
+  size: 'sm',
 }
