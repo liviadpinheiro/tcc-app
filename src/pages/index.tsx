@@ -25,7 +25,6 @@ const Home: NextPage = () => {
           pb={['32px', '48px']}
           flexDir={'column'}
           alignItems={'center'}
-          px={['16px', '96px']}
         >
           <Flex
             gap="24px"
@@ -51,7 +50,7 @@ const Home: NextPage = () => {
             </Flex>
             <Flex w={['100%', 'unset']} gap="12px" flexDir={['column', 'row']}>
               <Link href={'/cadastrar'}>
-                <Button w={['100%', 'unset']}>Começar agora</Button>
+                <Button w={['100%', 'fit-content']}>Começar agora</Button>
               </Link>
               <Link href={'/contato'}>
                 <Button w={['100%', 'unset']} variant="secondary">
@@ -73,6 +72,35 @@ const Home: NextPage = () => {
               objectPosition={'center'}
               rounded={'8px'}
               src={'/images/home-1.jpg'}
+              alt="Vista superior de uma mulher lendo tarô em casa"
+            />
+          </Flex>
+        </Flex>
+        <Flex flexDir={{ base: 'column', md: 'row' }} py={'48px'} alignItems={'center'} gap={['24px', '96px']}>
+          <Flex flexDir={'column'} gap={'16px'}>
+            <Text
+              lineHeight={['44px', '34px']}
+              fontSize={['36px', '28px']}
+              color={'primary.default'}
+              fontFamily={'heading'}
+            >
+              aumente sua produtividade com a nossa plataforma
+            </Text>
+            <Text fontSize={'18px'} lineHeight={'24px'}>
+              Nosso método exclusivo de compartilhamento de tiragens irá te surpreender.
+            </Text>
+            <Link href={'/cadastrar'}>
+              <Button w={['100%', 'fit-content']}>Começar agora</Button>
+            </Link>
+          </Flex>
+          <Flex>
+          <Img
+              w={'100%'}
+              h={'100%'}
+              objectFit={'cover'}
+              objectPosition={'center'}
+              rounded={'8px'}
+              src={'/images/home-2.jpg'}
               alt="Vista superior de uma mulher lendo tarô em casa"
             />
           </Flex>
