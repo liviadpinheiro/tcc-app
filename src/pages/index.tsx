@@ -21,8 +21,8 @@ const Home: NextPage = () => {
       <MainTemplate pathname={pathname} isLogged={false}>
         <Flex
           gap={'48px'}
-          pt={['48px', '120px']}
-          pb={['32px', '48px']}
+          pt={{ base: '48px', md: '120px' }}
+          pb={{ base: '32px', md: '48px' }}
           flexDir={'column'}
           alignItems={'center'}
         >
@@ -35,8 +35,8 @@ const Home: NextPage = () => {
             <Flex flexDir={'column'} gap="8px">
               <Text
                 textAlign={'center'}
-                lineHeight={['44px', '56px']}
-                fontSize={['36px', '48px']}
+                lineHeight={{ base: '44px', md: '56px' }}
+                fontSize={{ base: '36px', md: '48px' }}
                 color={'primary.default'}
                 fontFamily={'heading'}
               >
@@ -48,12 +48,18 @@ const Home: NextPage = () => {
                 compartilha com seus consulentes.
               </Text>
             </Flex>
-            <Flex w={['100%', 'unset']} gap="12px" flexDir={['column', 'row']}>
+            <Flex
+              w={{ base: '100%', md: 'unset' }}
+              gap="12px"
+              flexDir={{ base: 'column', md: 'row' }}
+            >
               <Link href={'/cadastrar'}>
-                <Button w={['100%', 'fit-content']}>Começar agora</Button>
+                <Button w={{ base: '100%', md: 'fit-content' }}>
+                  Começar agora
+                </Button>
               </Link>
               <Link href={'/contato'}>
-                <Button w={['100%', 'unset']} variant="secondary">
+                <Button w={{ base: '100%', md: 'unset' }} variant="secondary">
                   Fale conosco
                 </Button>
               </Link>
@@ -61,7 +67,7 @@ const Home: NextPage = () => {
           </Flex>
           <Flex
             w={'100%'}
-            h={['200px', '376px']}
+            h={{ base: '200px', md: '376px' }}
             overflow={'hidden'}
             position={'relative'}
           >
@@ -76,25 +82,33 @@ const Home: NextPage = () => {
             />
           </Flex>
         </Flex>
-        <Flex flexDir={{ base: 'column', md: 'row' }} py={'48px'} alignItems={'center'} gap={['24px', '96px']}>
+        <Flex
+          flexDir={{ base: 'column', md: 'row' }}
+          py={'48px'}
+          alignItems={'center'}
+          gap={{ base: '24px', md: '96px' }}
+        >
           <Flex flexDir={'column'} gap={'16px'}>
             <Text
-              lineHeight={['44px', '34px']}
-              fontSize={['36px', '28px']}
+              lineHeight={{ base: '44px', md: '34px' }}
+              fontSize={{ base: '36px', md: '28px' }}
               color={'primary.default'}
               fontFamily={'heading'}
             >
               aumente sua produtividade com a nossa plataforma
             </Text>
             <Text fontSize={'18px'} lineHeight={'24px'}>
-              Nosso método exclusivo de compartilhamento de tiragens irá te surpreender.
+              Nosso método exclusivo de compartilhamento de tiragens irá te
+              surpreender.
             </Text>
             <Link href={'/cadastrar'}>
-              <Button w={['100%', 'fit-content']}>Começar agora</Button>
+              <Button w={{ base: '100%', md: 'fit-content' }}>
+                Começar agora
+              </Button>
             </Link>
           </Flex>
           <Flex>
-          <Img
+            <Img
               w={'100%'}
               h={'100%'}
               objectFit={'cover'}

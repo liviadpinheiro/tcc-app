@@ -8,7 +8,7 @@ export const Footer = () => {
     <Flex
       w={'100%'}
       py={'48px'}
-      px={['16px', '96px']}
+      px={{ base: '16px', md: '96px' }}
       flexDirection={'column'}
       bgColor={'neutral.white'}
       gap={'24px'}
@@ -16,8 +16,8 @@ export const Footer = () => {
       <Flex
         alignItems={{ base: 'flex-start', sm: 'center' }}
         w={'100%'}
-        gap={['20px', 'unset']}
-        flexDir={['column', 'row']}
+        gap={{ base: '20px', md: 'unset' }}
+        flexDir={{ base: 'column', md: 'row' }}
         justifyContent={'space-between'}
       >
         <Link href="/">

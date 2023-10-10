@@ -15,7 +15,7 @@ function MainTemplate({ children, pathname, isLogged }: MainTemplateProps) {
         pathname={pathname}
         variant={isLogged ? NAVBAR_VARIANT.logIn : NAVBAR_VARIANT.signUp}
       />
-      <Flex px={['16px', '96px']} flexDir={'column'}>
+      <Flex px={{ base: '16px', md: '96px' }} flexDir={'column'}>
         {children}
       </Flex>
       <Footer />
