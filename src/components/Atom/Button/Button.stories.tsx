@@ -12,7 +12,7 @@ const Template: StoryFn<typeof Button> = (args) => <Button {...args} />
 export const Primary = Template.bind({})
 
 Primary.args = {
-  text: 'Button',
+  children: 'Button',
   variant: 'primary',
   size: 'md',
 }
@@ -20,7 +20,7 @@ Primary.args = {
 export const Secondary = Template.bind({})
 
 Secondary.args = {
-  text: 'Button',
+  children: 'Button',
   variant: 'secondary',
   size: 'md',
 }
@@ -28,7 +28,7 @@ Secondary.args = {
 export const Rounded = Template.bind({})
 
 Rounded.args = {
-  text: 'Button',
+  children: 'Button',
   variant: 'rounded',
   size: 'sm',
 }

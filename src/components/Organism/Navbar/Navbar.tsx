@@ -64,7 +64,7 @@ export const Navbar = ({ variant, pathname, userName }: NavbarProps) => {
                 <Text color={'neutral.white'}>Entrar</Text>
               </Link>
               <Link href={'/cadastrar'}>
-                <Button variant={'rounded'} size={'sm'} text={'Cadastrar'} />
+                <Button variant={'rounded'} size={'sm'}>Cadastrar</Button>
               </Link>
             </Flex>
           )}

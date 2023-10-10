@@ -4,14 +4,14 @@ import {
 } from '@chakra-ui/react'
 
 export interface ButtonProps extends ChakraButtonProps {
-  text?: string
+  children?: string
   variant?: string
 }
 
 export const Button = (props: ButtonProps) => {
   return (
     <ChakraButton variant={props.variant ?? 'primary'} {...props}>
-      {props.text}
+      {props.children}
     </ChakraButton>
   )
 }
