@@ -41,7 +41,11 @@ export const Navbar = ({ variant, pathname, userName }: NavbarProps) => {
     >
       <Flex h={'32px'} alignItems={'center'}>
         <Link href="/">
-          {navbarType === 'desktop' ? <LogoBgDarkIcon /> : <LogoSoloBgDarkIcon />}
+          {navbarType === 'desktop' ? (
+            <LogoBgDarkIcon />
+          ) : (
+            <LogoSoloBgDarkIcon />
+          )}
         </Link>
       </Flex>
       {navbarType === 'desktop' ? (
@@ -64,7 +68,9 @@ export const Navbar = ({ variant, pathname, userName }: NavbarProps) => {
                 <Text color={'neutral.white'}>Entrar</Text>
               </Link>
               <Link href={'/cadastrar'}>
-                <Button variant={'rounded'} size={'sm'}>Cadastrar</Button>
+                <Button variant={'rounded'} size={'sm'}>
+                  Cadastrar
+                </Button>
               </Link>
             </Flex>
           )}
