@@ -122,7 +122,11 @@ const Home: NextPage = () => {
             />
           </Flex>
         </Flex>
-        <Flex gap={{ base: '24px', md: '32px' }} flexDir={'column'} py={{ base: '36px', md: '48px' }}>
+        <Flex
+          gap={{ base: '24px', md: '32px' }}
+          flexDir={'column'}
+          py={{ base: '36px', md: '48px' }}
+        >
           <Text
             lineHeight={'44px'}
             fontSize={'36px'}
@@ -131,7 +135,11 @@ const Home: NextPage = () => {
           >
             relatos
           </Text>
-          <Flex gap={{ base: '16px', md: 'unset' }} flexDir={{ base: 'column', md: 'row' }}>
+          <Flex
+            gap={{ base: '16px', md: 'unset' }}
+            flexDir={{ base: 'column', md: 'row' }}
+            justifyContent={'space-between'}
+          >
             <Testimonial
               picture={'/images/profile-1.png'}
               state={'Maria'}
@@ -150,6 +158,45 @@ const Home: NextPage = () => {
               name={'Rio de Janeiro'}
               testimonial={'"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."'}
             />
+          </Flex>
+        </Flex>
+        <Flex
+          bgColor={'primary.default'}
+          py={{ base: '72px', md: '98px' }}
+          mx={{ base: '-16px', md: '-96px' }}
+          px={{ base: '16px', md: '96px' }}
+          flexDir={{ base: 'column', md: 'row' }}
+          alignItems={'center'}
+          justifyContent={'space-between'}
+          gap={{ base: '24px', md: 'unset' }}
+        >
+          <Text
+            lineHeight={'34px'}
+            fontSize={'28px'}
+            color={'neutral.white'}
+            fontFamily={'heading'}
+            maxW={'456px'}
+          >
+            Crie sua conta gratuitamente e comece a sua jornada hoje mesmo!
+          </Text>
+          <Flex
+            gap={{ base: '16px', md: '24px' }}
+            flexDir={{ base: 'column', md: 'row' }}
+            w={'100%'}
+          >
+            <Link href={'/contato'}>
+              <Button
+                w={{ base: '100%', md: 'fit-content' }}
+                variant="secondary"
+              >
+                Fale conosco
+              </Button>
+            </Link>
+            <Link href={'/cadastrar'}>
+              <Button w={{ base: '100%', md: 'fit-content' }}>
+                Começar agora
+              </Button>
+            </Link>
           </Flex>
         </Flex>
       </MainTemplate>
