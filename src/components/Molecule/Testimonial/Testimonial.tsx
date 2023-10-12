@@ -10,7 +10,7 @@ export interface TestimonialProps {
 export const Testimonial = ({ picture, state, name, testimonial }: TestimonialProps) => {
   return (
     <Flex
-      maxW={'295px'}
+      maxW={{ base: '100%', md: '295px'}}
       outline={'2px solid'}
       outlineColor={'primary.default'}
       rounded={'8px'}

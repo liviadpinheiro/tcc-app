@@ -5,6 +5,7 @@ import { useRouter } from 'next/router'
 import MainTemplate from '../components/Template/MainTemplate'
 import { Button } from '../components/Atom'
 import Link from 'next/link'
+import { Testimonial } from '../components/Molecule'
 
 const Home: NextPage = () => {
   const { pathname } = useRouter()
@@ -84,9 +85,11 @@ const Home: NextPage = () => {
         </Flex>
         <Flex
           flexDir={{ base: 'column', md: 'row' }}
-          py={'48px'}
+          pt={'48px'}
+          pb={{ base: 'unset', md: '48px' }}
           alignItems={'center'}
           gap={{ base: '24px', md: '96px' }}
+          justifyContent={'space-between'}
         >
           <Flex flexDir={'column'} gap={'16px'}>
             <Text
@@ -116,6 +119,36 @@ const Home: NextPage = () => {
               rounded={'8px'}
               src={'/images/home-2.jpg'}
               alt="Vista superior de uma mulher lendo tarô em casa"
+            />
+          </Flex>
+        </Flex>
+        <Flex gap={{ base: '24px', md: '32px' }} flexDir={'column'} py={{ base: '36px', md: '48px' }}>
+          <Text
+            lineHeight={'44px'}
+            fontSize={'36px'}
+            color={'primary.default'}
+            fontFamily={'heading'}
+          >
+            relatos
+          </Text>
+          <Flex gap={{ base: '16px', md: 'unset' }} flexDir={{ base: 'column', md: 'row' }}>
+            <Testimonial
+              picture={'/images/profile-1.png'}
+              state={'Maria'}
+              name={'Rio de Janeiro'}
+              testimonial={'"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."'}
+            />
+            <Testimonial
+              picture={'/images/profile-1.png'}
+              state={'Maria'}
+              name={'Rio de Janeiro'}
+              testimonial={'"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."'}
+            />
+            <Testimonial
+              picture={'/images/profile-1.png'}
+              state={'Maria'}
+              name={'Rio de Janeiro'}
+              testimonial={'"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."'}
             />
           </Flex>
         </Flex>
