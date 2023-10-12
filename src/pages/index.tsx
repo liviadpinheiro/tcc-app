@@ -182,7 +182,7 @@ const Home: NextPage = () => {
           <Flex
             gap={{ base: '16px', md: '24px' }}
             flexDir={{ base: 'column', md: 'row' }}
-            w={'100%'}
+            w={{ base: '100%', md: 'fit-content' }}
           >
             <Link href={'/contato'}>
               <Button
