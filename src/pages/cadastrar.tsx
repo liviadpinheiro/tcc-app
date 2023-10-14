@@ -11,7 +11,7 @@ import { CustomShowIcon } from "../../public/icons/show"
 import Link from "next/link"
 import { Button } from "../components/Atom/Button"
 
-const Contact: NextPage = () => {
+const LogIn: NextPage = () => {
   const [showPass, setShowPass] = useState(false)
   const [showConfPass, setShowConfPass] = useState(false)
   const handleClickPass = () => setShowPass(!showPass)
@@ -22,7 +22,7 @@ const Contact: NextPage = () => {
   return (
     <Flex>
       <Head>
-        <title>Contato | Jornada</title>
+        <title>Cadastrar | Jornada</title>
         <meta
           name="description"
           content="TCC de Página Web sobre Cartomancia"
@@ -129,4 +129,4 @@ const Contact: NextPage = () => {
   )
 }
 
-export default Contact
+export default LogIn
