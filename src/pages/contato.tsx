@@ -32,13 +32,13 @@ const Contact: NextPage = () => {
           pb={{ base: '36px', md: '64px' }}
         >
           <Text
-            textStyle={{ base: 'heading2', md: 'heading1' }}
+            textStyle={'heading1'}
             color={'primary.default'}
             textAlign={{ base: 'left', md: 'center' }}
           >
             envie suas dúvidas e feedbacks
           </Text>
-          <Text textStyle={'bodyLG'}>
+          <Text textAlign={'center'} textStyle={'bodyLG'}>
             Nossa dedicada equipe está sempre disponível para responder a todas
             as suas perguntas e ouvir seus comentários. Valorizamos muito a sua
             interação e estamos sempre prontos para atendê-lo!
@@ -49,7 +49,6 @@ const Contact: NextPage = () => {
           flexDir={'column'}
           alignItems={'center'}
           justifyContent={'space-between'}
-          gap={{ base: '24px', md: 'unset' }}
         >
           <Img w="100%" maxH="200px" src="/images/sun-bg.png"></Img>
           <SimpleGrid
