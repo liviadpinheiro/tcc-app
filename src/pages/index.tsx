@@ -3,9 +3,10 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import MainTemplate from '../components/Template/MainTemplate'
-import { Button } from '../components/Atom'
+import { Button } from '../components/Atom/Button'
 import Link from 'next/link'
-import { Testimonial } from '../components/Molecule'
+import { Testimonial } from '../components/Molecule/Testimonial'
+import { NAVBAR_VARIANT } from '../components/Organism/Navbar'
 
 const Home: NextPage = () => {
   const { pathname } = useRouter()
@@ -19,7 +20,7 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainTemplate pathname={pathname} isLogged={false}>
+      <MainTemplate pathname={pathname} navbarVariant={NAVBAR_VARIANT.signUp}>
         <Flex
           gap={'48px'}
           pt={{ base: '48px', md: '120px' }}

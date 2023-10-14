@@ -8,6 +8,7 @@ import { Input } from "../components/Atom/Input"
 
 import { Select } from "../components/Atom/Select"
 import { Textarea } from "../components/Atom/Textarea"
+import { NAVBAR_VARIANT } from "../components/Organism/Navbar"
 
 const Contact: NextPage = () => {
   const { pathname } = useRouter()
@@ -21,7 +22,7 @@ const Contact: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainTemplate pathname={pathname} isLogged={false}>
+      <MainTemplate pathname={pathname} navbarVariant={NAVBAR_VARIANT.signUp}>
         <Flex
           flexDir={'column'}
           maxW={'554px'}
@@ -69,14 +70,12 @@ const Contact: NextPage = () => {
               objectFit={'cover'}
               rounded={'8px'}
               src="/images/contact.jpg"
-              flex={'1'}
             />
-            <Flex flex={'1'} flexDir={'column'} gap={'24px'}>
+            <Flex flexDir={'column'} gap={'24px'}>
               <Input
                 label={'E-MAIL'}
                 placeholder="maria@silva.com"
                 w={'100%'}
-                flex={'1'}
                 type={'email'}
               />
               <Input
@@ -84,7 +83,6 @@ const Contact: NextPage = () => {
                 placeholder="Maria"
                 w={'100%'}
                 variant={'bgDark'}
-                flex={'1'}
               />
               <Select label={"Assunto"} placeholder={"Selecione um assunto"}>
                 <option value='relato'>Relato</option>
