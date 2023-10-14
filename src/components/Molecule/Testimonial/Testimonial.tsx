@@ -1,4 +1,4 @@
-import { Flex, Img, Text } from "@chakra-ui/react"
+import { Flex, Img, Text } from '@chakra-ui/react'
 
 export interface TestimonialProps {
   picture: string
@@ -7,10 +7,15 @@ export interface TestimonialProps {
   testimonial: string
 }
 
-export const Testimonial = ({ picture, state, name, testimonial }: TestimonialProps) => {
+export const Testimonial = ({
+  picture,
+  state,
+  name,
+  testimonial,
+}: TestimonialProps) => {
   return (
     <Flex
-      maxW={{ base: '100%', md: '295px'}}
+      maxW={{ base: '100%', md: '295px' }}
       outline={'2px solid'}
       outlineColor={'primary.default'}
       rounded={'8px'}
@@ -21,8 +26,16 @@ export const Testimonial = ({ picture, state, name, testimonial }: TestimonialPr
       <Flex gap={'8px'}>
         <Img w={'40px'} h={'40px'} src={picture} />
         <Flex flexDir={'column'}>
-          <Text fontSize={'18px'} lineHeight={'24px'}>{name}</Text>
-          <Text fontSize={'14px'} lineHeight={'20px'} color={'neutral.darkGray'}>{state}</Text>
+          <Text fontSize={'18px'} lineHeight={'24px'}>
+            {name}
+          </Text>
+          <Text
+            fontSize={'14px'}
+            lineHeight={'20px'}
+            color={'neutral.darkGray'}
+          >
+            {state}
+          </Text>
         </Flex>
       </Flex>
       <Text lineHeight={'24px'} fontSize={'16px'}>

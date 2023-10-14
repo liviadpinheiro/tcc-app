@@ -9,17 +9,15 @@ interface MainTemplateProps {
   navbarVariant: NAVBAR_VARIANT
 }
 
-function MainTemplate({ children, pathname, navbarVariant }: MainTemplateProps) {
+function MainTemplate({
+  children,
+  pathname,
+  navbarVariant,
+}: MainTemplateProps) {
   return (
     <Flex bgColor={'neutral.white'} flexDir={'column'} w={'100%'}>
-      <Navbar
-        pathname={pathname}
-        variant={navbarVariant}
-      />
-      <Flex
-        px={{ base: '16px', md: '96px' }}
-        flexDir={'column'}
-      >
+      <Navbar pathname={pathname} variant={navbarVariant} />
+      <Flex px={{ base: '16px', md: '96px' }} flexDir={'column'}>
         {children}
       </Flex>
       <Footer />

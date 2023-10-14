@@ -1,14 +1,14 @@
-import { Flex, Img, SimpleGrid, Text } from "@chakra-ui/react"
-import { NextPage } from "next"
-import Head from "next/head"
-import { useRouter } from "next/router"
-import MainTemplate from "../components/Template/MainTemplate"
-import { Button } from "../components/Atom/Button"
-import { Input } from "../components/Atom/Input"
+import { Flex, Img, SimpleGrid, Text } from '@chakra-ui/react'
+import { NextPage } from 'next'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import MainTemplate from '../components/Template/MainTemplate'
+import { Button } from '../components/Atom/Button'
+import { Input } from '../components/Atom/Input'
 
-import { Select } from "../components/Atom/Select"
-import { Textarea } from "../components/Atom/Textarea"
-import { NAVBAR_VARIANT } from "../components/Organism/Navbar"
+import { Select } from '../components/Atom/Select'
+import { Textarea } from '../components/Atom/Textarea'
+import { NAVBAR_VARIANT } from '../components/Organism/Navbar'
 
 const Contact: NextPage = () => {
   const { pathname } = useRouter()
@@ -32,14 +32,16 @@ const Contact: NextPage = () => {
           pb={{ base: '36px', md: '64px' }}
         >
           <Text
-            textStyle={{ base: 'heading2', md: 'heading1'}}
+            textStyle={{ base: 'heading2', md: 'heading1' }}
             color={'primary.default'}
-            textAlign={{ base: 'left', md: 'center'}}
+            textAlign={{ base: 'left', md: 'center' }}
           >
             envie suas dúvidas e feedbacks
           </Text>
           <Text textStyle={'bodyLG'}>
-            Nossa dedicada equipe está sempre disponível para responder a todas as suas perguntas e ouvir seus comentários. Valorizamos muito a sua interação e estamos sempre prontos para atendê-lo!
+            Nossa dedicada equipe está sempre disponível para responder a todas
+            as suas perguntas e ouvir seus comentários. Valorizamos muito a sua
+            interação e estamos sempre prontos para atendê-lo!
           </Text>
         </Flex>
         <Flex
@@ -49,11 +51,7 @@ const Contact: NextPage = () => {
           justifyContent={'space-between'}
           gap={{ base: '24px', md: 'unset' }}
         >
-          <Img
-            w="100%"
-            maxH="200px"
-            src="/images/sun-bg.png"
-          ></Img>
+          <Img w="100%" maxH="200px" src="/images/sun-bg.png"></Img>
           <SimpleGrid
             bgColor={'primary.default'}
             pt={{ base: '48px', md: '96px' }}
@@ -84,12 +82,17 @@ const Contact: NextPage = () => {
                 w={'100%'}
                 variant={'bgDark'}
               />
-              <Select label={"Assunto"} placeholder={"Selecione um assunto"}>
-                <option value='relato'>Relato</option>
-                <option value='suporte'>Suporte</option>
+              <Select label={'Assunto'} placeholder={'Selecione um assunto'}>
+                <option value="relato">Relato</option>
+                <option value="suporte">Suporte</option>
               </Select>
-              <Textarea label={'Mensagem'} placeholder={'Escreva sua mensagem'} />
-              <Button w={'fit-content'} alignSelf={'left'} variant="rounded">Enviar</Button>
+              <Textarea
+                label={'Mensagem'}
+                placeholder={'Escreva sua mensagem'}
+              />
+              <Button w={'fit-content'} alignSelf={'left'} variant="rounded">
+                Enviar
+              </Button>
             </Flex>
           </SimpleGrid>
         </Flex>

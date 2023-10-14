@@ -1,15 +1,15 @@
-import { Flex, SimpleGrid, Text, Img } from "@chakra-ui/react"
-import MainTemplate from "../components/Template/MainTemplate"
-import Head from "next/head"
-import { useRouter } from "next/router"
-import { NextPage } from "next"
-import { NAVBAR_VARIANT } from "../components/Organism/Navbar"
-import { Input } from "../components/Atom/Input"
-import { CustomHideIcon } from "../../public/icons/hide"
-import { useState } from "react"
-import { CustomShowIcon } from "../../public/icons/show"
-import Link from "next/link"
-import { Button } from "../components/Atom/Button"
+import { Flex, SimpleGrid, Text, Img } from '@chakra-ui/react'
+import MainTemplate from '../components/Template/MainTemplate'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { NextPage } from 'next'
+import { NAVBAR_VARIANT } from '../components/Organism/Navbar'
+import { Input } from '../components/Atom/Input'
+import { CustomHideIcon } from '../../public/icons/hide'
+import { useState } from 'react'
+import { CustomShowIcon } from '../../public/icons/show'
+import Link from 'next/link'
+import { Button } from '../components/Atom/Button'
 
 const LogIn: NextPage = () => {
   const [showPass, setShowPass] = useState(false)
@@ -37,7 +37,11 @@ const LogIn: NextPage = () => {
           pb={{ base: '32px', md: '48px' }}
           gap={{ base: '36px', md: '128px' }}
         >
-          <Flex alignItems={'center'} flexDir={'column'} gap={{ base: '36px', md: '32px' }}>
+          <Flex
+            alignItems={'center'}
+            flexDir={'column'}
+            gap={{ base: '36px', md: '32px' }}
+          >
             <Text
               textStyle={{ base: 'heading2', md: 'heading3' }}
               color={'primary.default'}
@@ -117,7 +121,10 @@ const LogIn: NextPage = () => {
                 </Button>
               </Link>
               <Link href={'/entrar'}>
-                <Button w={{ base: '100%', md: 'fit-content' }} variant="secondary">
+                <Button
+                  w={{ base: '100%', md: 'fit-content' }}
+                  variant="secondary"
+                >
                   Ir para login
                 </Button>
               </Link>
@@ -125,7 +132,7 @@ const LogIn: NextPage = () => {
           </Flex>
         </SimpleGrid>
       </MainTemplate>
-      </Flex>
+    </Flex>
   )
 }
 

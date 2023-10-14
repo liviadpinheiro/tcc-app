@@ -4,7 +4,7 @@ import { Textarea } from '.'
 
 export default {
   title: 'Atom/Textarea',
-  component: Textarea
+  component: Textarea,
 } as Meta
 
 const Template: StoryFn<typeof Textarea> = (args) => <Textarea {...args} />

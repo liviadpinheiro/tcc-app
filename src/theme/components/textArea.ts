@@ -14,13 +14,13 @@ const Textarea = defineStyleConfig({
     primary: {
       field: {
         bgColor: 'white',
-      }
+      },
     },
     outline: {
       field: {
         borderColor: 'primary.default',
-      }
-    }
+      },
+    },
   },
   defaultProps: {
     variant: 'primary',

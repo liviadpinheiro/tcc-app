@@ -22,7 +22,7 @@ export const Calendar = Template.bind({})
 Calendar.args = {
   label: 'Data de Nascimento',
   type: 'date',
-  variant: 'outline'
+  variant: 'outline',
 }
 
 export const Password = Template.bind({})
@@ -32,5 +32,5 @@ Password.args = {
   type: 'password',
   placeholder: '!S3nha',
   rightElement: CustomHideIcon(),
-  labelVariant: 'bgLight'
+  labelVariant: 'bgLight',
 }

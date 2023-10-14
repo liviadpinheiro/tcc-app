@@ -9,11 +9,11 @@ const FormLabel = defineStyleConfig({
   },
   variants: {
     bgDark: {
-      color: 'neutral.white'
+      color: 'neutral.white',
     },
     bgLight: {
       color: 'neutral.black',
-    }
+    },
   },
   defaultProps: {
     variant: 'bgDark',

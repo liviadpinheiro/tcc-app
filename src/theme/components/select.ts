@@ -5,19 +5,19 @@ const Select = defineStyleConfig({
     field: {
       opacity: 1,
       backgroundColor: 'white',
-    }
+    },
   },
   variants: {
     primary: {
       field: {
         bgColor: 'white',
-      }
+      },
     },
     outline: {
       field: {
         borderColor: 'primary.default',
-      }
-    }
+      },
+    },
   },
   defaultProps: {
     variant: 'primary',

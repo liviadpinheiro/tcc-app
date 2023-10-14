@@ -11,7 +11,6 @@ import shadows from './foundations/shadows'
 import breakpoints from './foundations/breakpoints'
 import textStyles from './foundations/text'
 
-
 // Component style overrides
 import Button from './components/button'
 import FormLabel from './components/formLabel'

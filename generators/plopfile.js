@@ -58,6 +58,6 @@ module.exports = (plop) => {
         path: '../src/pages/{{name}}.tsx',
         templateFile: 'templates/page.tsx.hbs',
       },
-    ]
+    ],
   })
 }
