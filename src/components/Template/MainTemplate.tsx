@@ -1,6 +1,7 @@
 import { Flex } from '@chakra-ui/react'
 import { ReactNode } from 'react'
-import { Footer, NAVBAR_VARIANT, Navbar } from '../Organism'
+import { NAVBAR_VARIANT, Navbar } from '../Organism/Navbar'
+import { Footer } from '../Organism/Footer'
 
 interface MainTemplateProps {
   children: ReactNode

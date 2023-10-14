@@ -8,7 +8,7 @@ export default {
   component: Input,
 } as Meta
 
-const Template: StoryFn = (args) => <Input {...args} />
+const Template: StoryFn<typeof Input> = (args) => <Input {...args} />
 
 export const Default = Template.bind({})
 
@@ -22,6 +22,7 @@ export const Calendar = Template.bind({})
 Calendar.args = {
   label: 'Data de Nascimento',
   type: 'date',
+  variant: 'outline'
 }
 
 export const Password = Template.bind({})
@@ -31,4 +32,5 @@ Password.args = {
   type: 'password',
   placeholder: '!S3nha',
   rightElement: CustomHideIcon(),
+  labelVariant: 'bgLight'
 }

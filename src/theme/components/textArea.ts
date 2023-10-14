@@ -1,6 +1,6 @@
 import { defineStyleConfig } from '@chakra-ui/react'
 
-const Input = defineStyleConfig({
+const Textarea = defineStyleConfig({
   baseStyle: {
     field: {
       opacity: 1,
@@ -27,4 +27,4 @@ const Input = defineStyleConfig({
   },
 })
 
-export default Input
+export default Textarea

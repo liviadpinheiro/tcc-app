@@ -1,6 +1,6 @@
 import { StoryFn, Meta } from '@storybook/react'
 
-import { NAVBAR_VARIANT, Navbar } from '.'
+import { NAVBAR_VARIANT, Navbar } from './Navbar'
 
 export default {
   title: 'Organism/Navbar',

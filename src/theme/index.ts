@@ -16,6 +16,8 @@ import textStyles from './foundations/text'
 import Button from './components/button'
 import FormLabel from './components/formLabel'
 import Input from './components/input'
+import Textarea from './components/textArea'
+import Select from './components/select'
 
 const customTheme = {
   styles,
@@ -29,6 +31,8 @@ const customTheme = {
     Button,
     FormLabel,
     Input,
+    Textarea,
+    Select,
   },
 }
 

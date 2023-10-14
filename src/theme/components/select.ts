@@ -1,14 +1,11 @@
 import { defineStyleConfig } from '@chakra-ui/react'
 
-const Input = defineStyleConfig({
+const Select = defineStyleConfig({
   baseStyle: {
     field: {
       opacity: 1,
       backgroundColor: 'white',
-      _placeholder: {
-        color: 'neutral.darkGray',
-      },
-    },
+    }
   },
   variants: {
     primary: {
@@ -27,4 +24,4 @@ const Input = defineStyleConfig({
   },
 })
 
-export default Input
+export default Select

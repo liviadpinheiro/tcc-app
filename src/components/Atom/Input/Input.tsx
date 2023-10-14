@@ -14,19 +14,20 @@ export interface InputProps extends ChakraInputProps {
   placeholder?: string
   rightElement?: ReactNode
   leftElement?: ReactNode
+  labelVariant?: 'bgDark' | 'bgLight'
 }
 
-export const Input = (props: InputProps) => {
+export const Input = ({ label, placeholder, labelVariant, leftElement, rightElement, ...props}: InputProps) => {
   return (
     <FormControl>
-      <FormLabel>{props.label}</FormLabel>
+      <FormLabel variant={labelVariant}>{label}</FormLabel>
       <InputGroup>
-        {props.leftElement && (
-          <InputLeftElement>{props.leftElement}</InputLeftElement>
+        {leftElement && (
+          <InputLeftElement>{leftElement}</InputLeftElement>
         )}
-        <ChakraInput placeholder={props.placeholder} {...props} />
-        {props.rightElement && (
-          <InputRightElement>{props.rightElement}</InputRightElement>
+        <ChakraInput placeholder={placeholder} {...props} />
+        {rightElement && (
+          <InputRightElement>{rightElement}</InputRightElement>
         )}
       </InputGroup>
     </FormControl>

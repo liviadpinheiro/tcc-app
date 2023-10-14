@@ -11,7 +11,7 @@ import {
 import { LogoBgDarkIcon } from '../../../../public/icons/logo-bg-dark'
 import Link from 'next/link'
 import { NAV_ITEMS, NavItem } from './NavItens'
-import { Button } from '../../Atom'
+import { Button } from '../../Atom/Button'
 import { LogoSoloBgDarkIcon } from '../../../../public/icons/logo-solo-bg-dark'
 import { HamburgerMenuIcon } from '../../../../public/icons/hamburger-menu'
 

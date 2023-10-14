@@ -1,9 +1,13 @@
-import { Flex, FormControl, FormLabel, Img, Select, SimpleGrid, Text, Textarea } from "@chakra-ui/react"
+import { Flex, Img, SimpleGrid, Text } from "@chakra-ui/react"
 import { NextPage } from "next"
 import Head from "next/head"
 import { useRouter } from "next/router"
 import MainTemplate from "../components/Template/MainTemplate"
-import { Button, Input } from "../components/Atom"
+import { Button } from "../components/Atom/Button"
+import { Input } from "../components/Atom/Input"
+
+import { Select } from "../components/Atom/Select"
+import { Textarea } from "../components/Atom/Textarea"
 
 const Contact: NextPage = () => {
   const { pathname } = useRouter()
@@ -71,7 +75,6 @@ const Contact: NextPage = () => {
               <Input
                 label={'E-MAIL'}
                 placeholder="maria@silva.com"
-                bgColor={'neutral.white'}
                 w={'100%'}
                 flex={'1'}
                 type={'email'}
@@ -79,26 +82,15 @@ const Contact: NextPage = () => {
               <Input
                 label={'Nome'}
                 placeholder="Maria"
-                bgColor={'neutral.white'}
                 w={'100%'}
+                variant={'bgDark'}
                 flex={'1'}
               />
-              <FormControl>
-                <FormLabel>
-                  Assunto
-                </FormLabel>
-                <Select bgColor={'neutral.white'} placeholder='Selecione um assunto'>
-                  <option value='relato'>Relato</option>
-                  <option value='suporte'>Suporte</option>
-                </Select>
-              </FormControl>
-              <FormControl>
-                <FormLabel>
-                  MENSAGEM
-                </FormLabel>
-                <Textarea bgColor={'neutral.white'} placeholder='Escreva sua mensagem'
-                />
-              </FormControl>
+              <Select label={"Assunto"} placeholder={"Selecione um assunto"}>
+                <option value='relato'>Relato</option>
+                <option value='suporte'>Suporte</option>
+              </Select>
+              <Textarea label={'Mensagem'} placeholder={'Escreva sua mensagem'} />
               <Button w={'fit-content'} alignSelf={'left'} variant="rounded">Enviar</Button>
             </Flex>
           </SimpleGrid>
