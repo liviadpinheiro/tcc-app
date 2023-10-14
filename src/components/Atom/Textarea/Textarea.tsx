@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react'
 
 export interface TextareaProps extends ChakraTextareaProps {
-  label: string
+  label?: string
   labelVariant?: 'bgDark' | 'bgLight'
 }
 

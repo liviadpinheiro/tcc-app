@@ -8,7 +8,7 @@ import { ReactNode } from 'react'
 
 export interface SelectProps extends ChakraSelectProps {
   children: ReactNode
-  label: string
+  label?: string
   labelVariant?: 'bgDark' | 'bgLight'
 }
 
