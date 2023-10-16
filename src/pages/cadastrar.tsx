@@ -71,6 +71,7 @@ const SignUp: NextPage = () => {
       } catch (error) {
         toast({
           title: "Erro!",
+          // @ts-ignore
           description: error.message,
           status: "error",
           duration: 3000,

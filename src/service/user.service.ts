@@ -7,6 +7,7 @@ export const createUser = async (userData: CreateUserDTO) => {
 
     return response.data;
   } catch (error) {
+    // @ts-ignore
     throw new Error(error.response.data.message || 'Erro ao fazer cadastro')
   }
 }
