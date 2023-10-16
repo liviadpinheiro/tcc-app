@@ -8,7 +8,6 @@ import { Input } from '../components/Atom/Input'
 
 import { Select } from '../components/Atom/Select'
 import { Textarea } from '../components/Atom/Textarea'
-import { NAVBAR_VARIANT } from '../components/Organism/Navbar'
 
 const Contact: NextPage = () => {
   const { pathname } = useRouter()
@@ -22,7 +21,7 @@ const Contact: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainTemplate pathname={pathname} navbarVariant={NAVBAR_VARIANT.signUp}>
+      <MainTemplate pathname={pathname}>
         <Flex
           flexDir={'column'}
           maxW={'554px'}

@@ -31,7 +31,7 @@ const validationSchema = yup.object().shape({
     .required("A confirmação de senha é obrigatória"),
 })
 
-const LogIn: NextPage = () => {
+const SignUp: NextPage = () => {
   const router = useRouter()
   const toast = useToast()
 
@@ -212,4 +212,4 @@ const LogIn: NextPage = () => {
   )
 }
 
-export default LogIn
+export default SignUp

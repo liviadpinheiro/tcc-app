@@ -3,7 +3,6 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import MainTemplate from '../components/Template/MainTemplate'
-import { NAVBAR_VARIANT } from '../components/Organism/Navbar'
 import { Button } from '../components/Atom/Button'
 import Link from 'next/link'
 
@@ -19,7 +18,7 @@ const Notes: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainTemplate pathname={pathname} navbarVariant={NAVBAR_VARIANT.signUp}>
+      <MainTemplate pathname={pathname}>
         <Flex
           gap={'36px'}
           flexDir={'column'}

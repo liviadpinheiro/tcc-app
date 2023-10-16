@@ -3,10 +3,8 @@ import { NextPage } from "next"
 import Head from "next/head"
 import { useRouter } from "next/router"
 import MainTemplate from "../components/Template/MainTemplate"
-import { NAVBAR_VARIANT } from "../components/Organism/Navbar"
 import { Input } from "../components/Atom/Input"
 import { Select } from "../components/Atom/Select"
-import { Textarea } from "../components/Atom/Textarea"
 import { Button } from "../components/Atom/Button"
 
 const Spread: NextPage = () => {
@@ -21,7 +19,7 @@ const Spread: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainTemplate pathname={pathname} navbarVariant={NAVBAR_VARIANT.signUp}>
+      <MainTemplate pathname={pathname}>
       <Flex
           flexDir={'column'}
           maxW={'554px'}

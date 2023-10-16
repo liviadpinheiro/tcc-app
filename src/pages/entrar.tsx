@@ -10,12 +10,34 @@ import { CustomHideIcon } from '../../public/icons/hide'
 import { CustomShowIcon } from '../../public/icons/show'
 import Link from 'next/link'
 import { Button } from '../components/Atom/Button'
+import * as yup from "yup"
+import { useFormik } from 'formik'
+import { login } from 'src/service/auth.service'
 
-const SignUp: NextPage = () => {
+const validationSchema = yup.object().shape({
+  email: yup.string().email("E-mail inválido").required("O e-mail é obrigatório"),
+  password: yup.string().min(8, "A senha deve ter pelo menos 8 caracteres").required("A senha é obrigatória"),
+})
+
+const LogIn: NextPage = () => {
+  const router = useRouter()
+
+  const [isLoading, setIsLoading] = useState(false);
   const [showPass, setShowPass] = useState(false)
   const handleClickPass = () => setShowPass(!showPass)
 
-  const { pathname } = useRouter()
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema,
+    onSubmit: async (values) => {
+      setIsLoading(true)
+      await login(values.email, values.password)
+      router.push('/');
+    },
+  });
 
   return (
     <Flex>
@@ -27,7 +49,8 @@ const SignUp: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainTemplate pathname={pathname} navbarVariant={NAVBAR_VARIANT.default}>
+      <MainTemplate pathname={router.pathname} navbarVariant={NAVBAR_VARIANT.default}>
+      <form onSubmit={formik.handleSubmit}>
         <Flex
           alignItems={'center'}
           pt={'48px'}
@@ -36,13 +59,15 @@ const SignUp: NextPage = () => {
           flexDir={{ base: 'column-reverse', md: 'row' }}
           w={'100%'}
         >
-          <Flex w={'100%'} flex={1} flexDir={'column'} gap={'24px'}>
+
+            <Flex w={'100%'} flex={1} flexDir={'column'} gap={'24px'}>
             <Input
               label={'e-mail'}
               placeholder={'maria@silva.com'}
               labelVariant={'bgLight'}
               variant={'outline'}
-              type={'email'}
+              errorText={formik.touched.email  ? formik.errors.email : undefined}
+                {...formik.getFieldProps("email")}
             />
             <Input
               label={'senha'}
@@ -55,6 +80,8 @@ const SignUp: NextPage = () => {
                 </Flex>
               }
               type={showPass ? 'text' : 'password'}
+              errorText={formik.touched.password  ? formik.errors.password : undefined}
+                {...formik.getFieldProps("password")}
             />
             <Flex
               w={'100%'}
@@ -62,9 +89,7 @@ const SignUp: NextPage = () => {
               gap={'12px'}
               flexDir={{ base: 'column', md: 'row' }}
             >
-              <Link href={'/'}>
-                <Button w={{ base: '100%', md: 'fit-content' }}>Entrar</Button>
-              </Link>
+              <Button isLoading={isLoading} type={'submit'} w={{ base: '100%', md: 'fit-content' }}>Entrar</Button>
               <Link href={'/cadastrar'}>
                 <Button
                   w={{ base: '100%', md: 'fit-content' }}
@@ -86,6 +111,7 @@ const SignUp: NextPage = () => {
               </Flex>
             </Flex>
           </Flex>
+
           <Flex
             flex={1}
             alignItems={'center'}
@@ -108,9 +134,10 @@ const SignUp: NextPage = () => {
             />
           </Flex>
         </Flex>
+        </form>
       </MainTemplate>
     </Flex>
   )
 }
 
-export default SignUp
+export default LogIn

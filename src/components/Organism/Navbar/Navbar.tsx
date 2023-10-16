@@ -14,6 +14,7 @@ import { NAV_ITEMS, NavItem } from './NavItens'
 import { Button } from '../../Atom/Button'
 import { LogoSoloBgDarkIcon } from '../../../../public/icons/logo-solo-bg-dark'
 import { HamburgerMenuIcon } from '../../../../public/icons/hamburger-menu'
+import { useRouter } from 'next/router'
 
 export enum NAVBAR_VARIANT {
   logIn = 'log_in',
@@ -24,11 +25,19 @@ export enum NAVBAR_VARIANT {
 export interface NavbarProps {
   variant: NAVBAR_VARIANT
   pathname: string
-  userName?: string
+  userName: string | null
 }
 
 export const Navbar = ({ variant, pathname, userName }: NavbarProps) => {
   const navbarType = useBreakpointValue({ base: 'mobile', md: 'desktop' })
+
+  const router = useRouter()
+
+  const logout = () => {
+    localStorage.clear()
+    router.push('/')
+    window.location.reload()
+  }
 
   return (
     <Flex
@@ -87,7 +96,7 @@ export const Navbar = ({ variant, pathname, userName }: NavbarProps) => {
                 </Text>
               </MenuButton>
               <MenuList>
-                <MenuItem>Sair</MenuItem>
+                <MenuItem onClick={logout}>Sair</MenuItem>
               </MenuList>
             </Menu>
           )}

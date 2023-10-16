@@ -6,10 +6,10 @@ import MainTemplate from '../components/Template/MainTemplate'
 import { Button } from '../components/Atom/Button'
 import Link from 'next/link'
 import { Testimonial } from '../components/Molecule/Testimonial'
-import { NAVBAR_VARIANT } from '../components/Organism/Navbar'
 
 const Home: NextPage = () => {
   const { pathname } = useRouter()
+
   return (
     <Flex>
       <Head>
@@ -20,7 +20,7 @@ const Home: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainTemplate pathname={pathname} navbarVariant={NAVBAR_VARIANT.signUp}>
+      <MainTemplate pathname={pathname}>
         <Flex
           gap={'48px'}
           pt={{ base: '48px', md: '120px' }}
