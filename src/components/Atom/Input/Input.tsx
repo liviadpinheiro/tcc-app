@@ -6,31 +6,45 @@ import {
   InputGroup,
   InputRightElement,
   InputLeftElement,
+  FormControlProps,
+  FormHelperText,
 } from '@chakra-ui/react'
-import { ReactNode } from 'react'
+import React, { ReactNode } from 'react'
+import ReactInputMask from 'react-input-mask'
 
 export interface InputProps extends ChakraInputProps {
   label?: string
-  placeholder?: string
   rightElement?: ReactNode
   leftElement?: ReactNode
   labelVariant?: 'bgDark' | 'bgLight'
+  controlProps?: FormControlProps
+  mask?: string | (string | RegExp)[]
+  errorText?: string
 }
 
 export const Input = ({
   label,
-  placeholder,
   labelVariant,
   leftElement,
   rightElement,
+  controlProps,
+  errorText,
+  mask,
   ...props
 }: InputProps) => {
   return (
-    <FormControl>
+    <FormControl isInvalid={Boolean(errorText)} {...controlProps}>
       <FormLabel variant={labelVariant}>{label}</FormLabel>
-      <InputGroup>
+      <InputGroup flexDir={'column'}>
         {leftElement && <InputLeftElement>{leftElement}</InputLeftElement>}
-        <ChakraInput placeholder={placeholder} {...props} />
+          {mask ? (
+            <ReactInputMask mask={mask} {...props}>
+              {(inputProps: InputProps) => <ChakraInput {...inputProps} />}
+            </ReactInputMask>
+          ) : (
+            <ChakraInput {...props} />
+          )}
+        {errorText && <FormHelperText color={'red.500'}>{errorText}</FormHelperText>}
         {rightElement && <InputRightElement>{rightElement}</InputRightElement>}
       </InputGroup>
     </FormControl>
