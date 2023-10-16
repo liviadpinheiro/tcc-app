@@ -39,6 +39,7 @@ export const Input = ({
         {leftElement && <InputLeftElement>{leftElement}</InputLeftElement>}
           {mask ? (
             <ReactInputMask mask={mask} {...props}>
+              {/* @ts-ignore */}
               {(inputProps: InputProps) => <ChakraInput {...inputProps} />}
             </ReactInputMask>
           ) : (
