@@ -1,4 +1,4 @@
-import { Flex, SimpleGrid, Text, Img } from '@chakra-ui/react'
+import { Flex, Text, Img, useToast } from '@chakra-ui/react'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
@@ -21,6 +21,7 @@ const validationSchema = yup.object().shape({
 
 const LogIn: NextPage = () => {
   const router = useRouter()
+  const toast = useToast()
 
   const [isLoading, setIsLoading] = useState(false);
   const [showPass, setShowPass] = useState(false)
@@ -35,7 +36,17 @@ const LogIn: NextPage = () => {
     onSubmit: async (values) => {
       setIsLoading(true)
       await login(values.email, values.password)
-      router.push('/');
+      toast({
+        title: 'Login realizado.',
+        description: "Você será redirecionado para a página de anotações.",
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      })
+
+      setTimeout(() => {
+        router.push('/anotacoes');
+      }, 3100);
     },
   });
 

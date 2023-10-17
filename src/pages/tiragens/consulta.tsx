@@ -2,14 +2,14 @@ import { Flex } from "@chakra-ui/react"
 import { NextPage } from "next"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import MainTemplate from "../components/Template/MainTemplate"
+import MainTemplate from "../../components/Template/MainTemplate"
 
-const {{pascalCase name}}: NextPage = () => {
+const Consulta: NextPage = () => {
   const { pathname } = useRouter()
   return (
     <Flex>
       <Head>
-        <title>{{pascalCase name}} | Jornada</title>
+        <title>Consulta | Jornada</title>
         <meta
           name="description"
           content="TCC de Página Web sobre Cartomancia"
@@ -18,11 +18,11 @@ const {{pascalCase name}}: NextPage = () => {
       </Head>
       <MainTemplate pathname={pathname}>
         <Flex>
-          {{pascalCase name}}
+          Página em construção
         </Flex>
       </MainTemplate>
     </Flex>
   )
 }
 
-export default {{pascalCase name}}
+export default Consulta

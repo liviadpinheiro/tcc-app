@@ -2,13 +2,21 @@ import { Flex, Img, SimpleGrid, Text } from "@chakra-ui/react"
 import { NextPage } from "next"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import MainTemplate from "../components/Template/MainTemplate"
-import { Input } from "../components/Atom/Input"
-import { Select } from "../components/Atom/Select"
-import { Button } from "../components/Atom/Button"
+import MainTemplate from "../../components/Template/MainTemplate"
+import { Input } from "../../components/Atom/Input"
+import { Select } from "../../components/Atom/Select"
+import { Button } from "../../components/Atom/Button"
+import { useEffect, useState } from "react"
+import Link from "next/link"
 
 const Spread: NextPage = () => {
   const { pathname } = useRouter()
+
+  const [token, setToken] = useState<string | null>(null)
+
+  useEffect(() => {
+    setToken(localStorage.getItem('token'))
+  }, []);
   return (
     <Flex>
       <Head>
@@ -107,9 +115,11 @@ const Spread: NextPage = () => {
                 w={'100%'}
                 type="number"
               />
-              <Button w={'fit-content'} alignSelf={'left'} variant="rounded">
-                Enviar
-              </Button>
+              <Link href={token ? '/tiragens/consulta' : '/cadastrar'}>
+                <Button w={'fit-content'} alignSelf={'left'} variant="rounded">
+                  {token ? 'Enviar' : 'Criar conta'}
+                </Button>
+              </Link>
             </Flex>
           </SimpleGrid>
         </Flex>
