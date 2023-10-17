@@ -9,7 +9,7 @@ import { IDeck } from 'src/interfaces/deck.entity'
 import { findAllDecks } from 'src/service/deck.service'
 import { useEffect, useState } from 'react'
 
-const Notes: NextPage = ({ decks }) => {
+const Notes: NextPage<{ decks: IDeck[]}> = ({ decks }) => {
   const { pathname } = useRouter()
 
   const [token, setToken] = useState<string | null>(null)
@@ -49,7 +49,7 @@ const Notes: NextPage = ({ decks }) => {
             </Text>
           </Flex>
           <Flex w={'100%'} flexDir={'column'} gap={'20px'}>
-          {decks.map(({ name, description, imageUrl, imagePosition, id }: IDeck) => {
+          {decks.map(({ name, description, imageUrl, imagePosition, id }) => {
             return (
               <Box
                 position="relative"
