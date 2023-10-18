@@ -35,18 +35,31 @@ const LogIn: NextPage = () => {
     validationSchema,
     onSubmit: async (values) => {
       setIsLoading(true)
-      await login(values.email, values.password)
-      toast({
-        title: 'Login realizado.',
-        description: "Você será redirecionado para a página de anotações.",
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-      })
+      try {
+        await login(values.email, values.password)
+        toast({
+          title: 'Login realizado.',
+          description: "Você será redirecionado para a página de anotações.",
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
 
-      setTimeout(() => {
-        router.push('/anotacoes');
-      }, 3100);
+        setTimeout(() => {
+          router.push('/anotacoes');
+        }, 3100);
+      } catch (error) {
+        toast({
+          title: "Erro!",
+          // @ts-ignore
+          description: error.message,
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+
+        setIsLoading(false)
+      }
     },
   });
 
