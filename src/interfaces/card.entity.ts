@@ -1,7 +1,5 @@
-import { UUID } from "crypto"
-
 export interface ICard {
-  id: UUID
+  id: string
   name: string
   number: number
   imageUrl: string

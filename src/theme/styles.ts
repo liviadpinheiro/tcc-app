@@ -1,6 +1,9 @@
 const styles = {
   global: {
     'html, body': {},
+    form: {
+      width: '100%'
+    }
   },
 }
 

@@ -7,6 +7,7 @@ export const login = async (email: string, password: string) => {
     if (response.data.access_token) {
       localStorage.setItem('token', response.data.access_token);
       localStorage.setItem('name', response.data.fullName.split(" ")[0]);
+      localStorage.setItem('userId', response.data.id);
 
       return response.data;
     }

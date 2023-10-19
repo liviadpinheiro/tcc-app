@@ -9,15 +9,19 @@ import { UUID } from "crypto"
 import { useDeckStore } from "src/stores/deck.store"
 import { Button } from "src/components/Atom/Button"
 import { useEffect, useState } from "react"
+import { useCardStore } from "src/stores/card.store"
 
 const Cards: NextPage<{ cards: ICard[]}> = ({ cards }) => {
   const router = useRouter()
   const { selectedDeck } = useDeckStore()
+  const { addSelectedCard } = useCardStore()
 
   const [token, setToken] = useState<string | null>(null)
 
   const handleClick = (card: ICard) => {
     if (token) {
+      addSelectedCard(card)
+
       router.push(`/anotacoes/${card.deck_id}/${card.id}`)
     } else {
       router.push('/cadastrar')

@@ -1,7 +1,5 @@
-import { UUID } from "crypto"
-
 export interface IDeck {
-  id: UUID
+  id: string
   name: string
   description: string
   imageUrl: string
