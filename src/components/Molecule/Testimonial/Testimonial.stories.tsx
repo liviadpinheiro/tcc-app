@@ -14,7 +14,6 @@ const Template: StoryFn<typeof Testimonial> = (args) => (
 export const Default = Template.bind({})
 
 Default.args = {
-  picture: '/images/profile-1.png',
   name: 'Maria',
   state: 'Rio de Janeiro',
   testimonial:

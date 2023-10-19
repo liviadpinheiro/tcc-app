@@ -1,14 +1,13 @@
-import { Flex, Img, Text } from '@chakra-ui/react'
+import { Flex, Text } from '@chakra-ui/react'
+import { LogoSoloBgLightIcon } from 'public/icons/logo-solo-bg-light'
 
 export interface TestimonialProps {
-  picture: string
   state: string
   name: string
   testimonial: string
 }
 
 export const Testimonial = ({
-  picture,
   state,
   name,
   testimonial,
@@ -24,7 +23,7 @@ export const Testimonial = ({
       gap={'18px'}
     >
       <Flex gap={'8px'}>
-        <Img w={'40px'} h={'40px'} src={picture} />
+        <LogoSoloBgLightIcon />
         <Flex flexDir={'column'}>
           <Text fontSize={'18px'} lineHeight={'24px'}>
             {name}

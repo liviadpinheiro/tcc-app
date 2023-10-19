@@ -6,8 +6,10 @@ import MainTemplate from '../components/Template/MainTemplate'
 import { Button } from '../components/Atom/Button'
 import Link from 'next/link'
 import { Testimonial } from '../components/Molecule/Testimonial'
+import { findTestimonials } from 'src/service/contact.service'
+import { ITestimonial } from 'src/interfaces/testimonial.entity'
 
-const Home: NextPage = () => {
+const Home: NextPage<{ testimonials: ITestimonial[] }> = ({ testimonials }) => {
   const { pathname } = useRouter()
 
   return (
@@ -141,30 +143,14 @@ const Home: NextPage = () => {
             flexDir={{ base: 'column', md: 'row' }}
             justifyContent={'space-between'}
           >
-            <Testimonial
-              picture={'/images/profile-1.png'}
-              state={'Maria'}
-              name={'Rio de Janeiro'}
-              testimonial={
-                '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."'
-              }
-            />
-            <Testimonial
-              picture={'/images/profile-1.png'}
-              state={'Maria'}
-              name={'Rio de Janeiro'}
-              testimonial={
-                '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."'
-              }
-            />
-            <Testimonial
-              picture={'/images/profile-1.png'}
-              state={'Maria'}
-              name={'Rio de Janeiro'}
-              testimonial={
-                '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."'
-              }
-            />
+            {testimonials.map(({ name, state, message, id }) =>
+              <Testimonial
+                state={name}
+                name={state}
+                testimonial={`"${message}"`}
+                key={id}
+              />
+            )}
           </Flex>
         </Flex>
         <Flex
@@ -209,6 +195,16 @@ const Home: NextPage = () => {
       </MainTemplate>
     </Flex>
   )
+}
+
+export async function getServerSideProps() {
+  const testimonials: ITestimonial[] = await findTestimonials()
+
+  return {
+    props: {
+      testimonials
+    }
+  }
 }
 
 export default Home
