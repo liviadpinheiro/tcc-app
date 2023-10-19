@@ -1,26 +1,24 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { Box, Flex, Image, Text } from '@chakra-ui/react'
-import { NextPage } from 'next'
-import Head from 'next/head'
-import { useRouter } from 'next/router'
-import MainTemplate from '../../components/Template/MainTemplate'
-import { Button } from '../../components/Atom/Button'
-import { IDeck } from 'src/interfaces/deck.entity'
-import { findAllDecks } from 'src/service/deck.service'
-import { useEffect, useState } from 'react'
-import { useDeckStore } from 'src/stores/deck.store'
+import { Box, Flex, Text } from "@chakra-ui/react"
+import { GetServerSidePropsContext, NextPage } from "next"
+import Head from "next/head"
+import { useRouter } from "next/router"
+import MainTemplate from "../../../components/Template/MainTemplate"
+import { findAllDeckCards } from "src/service/card.service"
+import { ICard } from "src/interfaces/card.entity"
+import { UUID } from "crypto"
+import { useDeckStore } from "src/stores/deck.store"
+import { Button } from "src/components/Atom/Button"
+import { useEffect, useState } from "react"
 
-const Notes: NextPage<{ decks: IDeck[]}> = ({ decks }) => {
+const Cards: NextPage<{ cards: ICard[]}> = ({ cards }) => {
   const router = useRouter()
-  const { addSelectedDeck } = useDeckStore()
+  const { selectedDeck } = useDeckStore()
 
   const [token, setToken] = useState<string | null>(null)
 
-  const handleClick = (deck: IDeck) => {
+  const handleClick = (card: ICard) => {
     if (token) {
-      addSelectedDeck(deck)
-
-      router.push(`/anotacoes/${deck.id}`)
+      router.push(`/anotacoes/${card.deck_id}/${card.id}`)
     } else {
       router.push('/cadastrar')
     }
@@ -33,7 +31,7 @@ const Notes: NextPage<{ decks: IDeck[]}> = ({ decks }) => {
   return (
     <Flex>
       <Head>
-        <title>Anotações | Jornada</title>
+        <title>{selectedDeck.name} | Jornada</title>
         <meta
           name="description"
           content="TCC de Página Web sobre Cartomancia"
@@ -41,7 +39,7 @@ const Notes: NextPage<{ decks: IDeck[]}> = ({ decks }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainTemplate pathname={router.pathname}>
-        <Flex
+      <Flex
           gap={'36px'}
           flexDir={'column'}
           w={'100%'}
@@ -53,31 +51,27 @@ const Notes: NextPage<{ decks: IDeck[]}> = ({ decks }) => {
               color={'primary.default'}
               textStyle={{ base: 'heading3', md: 'heading2' }}
             >
-              selecione um oráculo
+              {selectedDeck.name?.toLowerCase()}
             </Text>
             <Text textStyle={'bodyLG'}>
-              Escolha qual oráculo você deseja estudar hoje, suas anotações
-              ficarão salvas conosco!
+              Escolha qual carta você deseja estudar hoje, suas anotações ficarão salvas conosco!
             </Text>
           </Flex>
           <Flex w={'100%'} flexDir={'column'} gap={'20px'}>
-          {decks.map((deck) => {
+          {cards?.map((card) => {
             return (
               <Box
                 position="relative"
-                maxH="245px"
-                w="full"
+                h="90px"
+                w="100%"
                 rounded="8px"
                 overflow="hidden"
-                key={deck.id}
+                key={card.id}
               >
-                <Image
+                <Box
                   w={'100%'}
                   h={'100%'}
-                  objectFit={'cover'}
-                  src={deck.imageUrl}
-                  objectPosition={deck.imagePosition}
-                  alt={`Imagem do oráculo ${deck.name.toLowerCase()}`}
+                  bgColor={'primary.default'}
                 />
                 <Box
                   position={'absolute'}
@@ -96,24 +90,20 @@ const Notes: NextPage<{ decks: IDeck[]}> = ({ decks }) => {
                   right={'0'}
                   bottom={'0'}
                   p={{ base: '16px', md: '24px' }}
-                  maxW={'340px'}
                   gap={'16px'}
-                  flexDir={'column'}
+                  flexDir={{ base: 'column', sm: 'row' }}
+                  alignItems={'center'}
+                  justifyContent={'space-between'}
                 >
-                  <Flex gap={'8px'} flexDir={'column'}>
-                    <Text textStyle={'heading3'} color={'neutral.white'}>
-                      {deck.name}
-                    </Text>
-                    <Text textStyle={'bodyLG'} color={'neutral.gray'}>
-                      {deck.description}
-                    </Text>
-                  </Flex>
+                  <Text textStyle={'heading3'} color={'neutral.white'}>
+                    {card.number}. {card.name}
+                  </Text>
                   <Button
-                    w={{ base: '100%', md: 'fit-content' }}
+                    w={{ base: '100%', sm: 'fit-content' }}
                     variant="secondary"
-                    onClick={() => handleClick(deck)}
+                    onClick={() => handleClick(card)}
                   >
-                    {token ? 'Selecionar' : 'Criar conta'}
+                    Selecionar
                   </Button>
                 </Flex>
               </Box>
@@ -125,14 +115,16 @@ const Notes: NextPage<{ decks: IDeck[]}> = ({ decks }) => {
   )
 }
 
-export async function getServerSideProps() {
-  const decks: IDeck[] = await findAllDecks()
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const { deckId } = context.params as { deckId: UUID }
+
+  const cards: ICard[] = await findAllDeckCards(deckId)
 
   return {
     props: {
-      decks
+      cards
     }
   }
 }
 
-export default Notes
+export default Cards

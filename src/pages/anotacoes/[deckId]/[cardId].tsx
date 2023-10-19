@@ -2,7 +2,7 @@ import { Flex } from "@chakra-ui/react"
 import { NextPage } from "next"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import MainTemplate from "../../components/Template/MainTemplate"
+import MainTemplate from "../../../components/Template/MainTemplate"
 
 const Cards: NextPage = () => {
   const router = useRouter()

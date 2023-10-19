@@ -8,6 +8,6 @@ export const findAllDecks = async (): Promise<IDeck[]> => {
     return response.data;
   } catch (error) {
     // @ts-ignore
-    throw new Error(error.response.data.message || 'Erro ao fazer cadastro')
+    throw new Error(error.response.data.message || 'Erro ao buscar decks')
   }
 }
