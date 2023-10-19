@@ -9,7 +9,7 @@ import { useFormik } from "formik"
 import * as yup from "yup"
 import { CreateNotesDTO } from "src/interfaces/create-notes.dto"
 import { createNotes, findNotesByCardAndUser } from "src/service/notes.service"
-import { Input } from "src/components/Atom/Input"
+import { Textarea } from "src/components/Atom/Textarea"
 import { Button } from "src/components/Atom/Button"
 import { INotes } from "src/interfaces/notes.entity"
 
@@ -129,42 +129,42 @@ const Cards: NextPage = () => {
               <Text textStyle={{ base: 'heading2', md: 'heading1' }}>
                 {selectedCard.name}
               </Text>
-              <Input
+              <Textarea
                 label={'SIGNIFICADO PRINCIPAL'}
                 placeholder={'O que a carta representa para você?'}
                 labelVariant={'bgLight'}
                 variant={'outline'}
                 {...formik.getFieldProps("meaning")}
               />
-              <Input
+              <Textarea
                 label={'palavras-chave'}
                 placeholder={'Palavras curtas e diretas sobre a carta'}
                 labelVariant={'bgLight'}
                 variant={'outline'}
                 {...formik.getFieldProps("keywords")}
               />
-              <Input
+              <Textarea
                 label={'Significado dos elementos'}
                 placeholder={'O que seus elementos simbolizam?'}
                 labelVariant={'bgLight'}
                 variant={'outline'}
                 {...formik.getFieldProps("elements_meaning")}
               />
-              <Input
+              <Textarea
                 label={'Significado em áreas específicas'}
                 placeholder={'O que ela simboliza na saúde ou amor?'}
                 labelVariant={'bgLight'}
                 variant={'outline'}
                 {...formik.getFieldProps("specific_meaning")}
               />
-              <Input
+              <Textarea
                 label={'tema relacionado'}
                 placeholder={'O que te faz lembrar dessa carta?'}
                 labelVariant={'bgLight'}
                 variant={'outline'}
                 {...formik.getFieldProps("related_theme")}
               />
-              <Input
+              <Textarea
                 label={'observações adicionais'}
                 placeholder={'O que mais você tem a dizer?'}
                 labelVariant={'bgLight'}
