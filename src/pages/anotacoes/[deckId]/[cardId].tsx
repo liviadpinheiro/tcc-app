@@ -55,6 +55,7 @@ const Cards: NextPage = () => {
     onSubmit: async (values: CreateNotesDTO) => {
       setIsLoading(true)
       try {
+        console.log(values)
         Object.assign(values, { card_id: selectedCard.id, user_id: userId })
 
         await createNotes(values)
@@ -86,7 +87,9 @@ const Cards: NextPage = () => {
   }, []);
 
   useEffect(() => {
-    formik.setValues(notesData)
+    if (notesData) {
+      formik.setValues(notesData)
+    }
   }, [notesData]);
 
   useEffect(() => {
