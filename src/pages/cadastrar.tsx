@@ -10,32 +10,44 @@ import { useState } from 'react'
 import { CustomShowIcon } from '../../public/icons/show'
 import Link from 'next/link'
 import { Button } from '../components/Atom/Button'
-import * as yup from "yup"
+import * as yup from 'yup'
 import { CreateUserDTO } from 'src/interfaces/create-user.dto'
 import { useFormik } from 'formik'
 import { createUser } from 'src/service/user.service'
 
 const validationSchema = yup.object().shape({
-  fullName: yup.string().required("O nome é obrigatório"),
-  email: yup.string().email("E-mail inválido").required("O e-mail é obrigatório"),
-  confirmEmail: yup.string()
+  fullName: yup.string().required('O nome é obrigatório'),
+  email: yup
+    .string()
+    .email('E-mail inválido')
+    .required('O e-mail é obrigatório'),
+  confirmEmail: yup
+    .string()
     .oneOf([yup.ref('email'), undefined], 'Os emails devem corresponder')
-    .required("A confirmação de email é obrigatória"),
-  birthdate: yup.date()
-    .max(new Date(), "A data de nascimento não pode ser no futuro")
-    .required("A data de nascimento é obrigatória"),
-  cpf: yup.string().length(14, "O CPF deve ter 11 números").required("O CPF é obrigatório"),
-  password: yup.string().min(8, "A senha deve ter pelo menos 8 caracteres").required("A senha é obrigatória"),
-  confirmPassword: yup.string()
+    .required('A confirmação de email é obrigatória'),
+  birthdate: yup
+    .date()
+    .max(new Date(), 'A data de nascimento não pode ser no futuro')
+    .required('A data de nascimento é obrigatória'),
+  cpf: yup
+    .string()
+    .length(14, 'O CPF deve ter 11 números')
+    .required('O CPF é obrigatório'),
+  password: yup
+    .string()
+    .min(8, 'A senha deve ter pelo menos 8 caracteres')
+    .required('A senha é obrigatória'),
+  confirmPassword: yup
+    .string()
     .oneOf([yup.ref('password'), undefined], 'As senhas devem corresponder')
-    .required("A confirmação de senha é obrigatória"),
+    .required('A confirmação de senha é obrigatória'),
 })
 
 const SignUp: NextPage = () => {
   const router = useRouter()
   const toast = useToast()
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
   const [showPass, setShowPass] = useState(false)
   const [showConfPass, setShowConfPass] = useState(false)
   const handleClickPass = () => setShowPass(!showPass)
@@ -59,29 +71,29 @@ const SignUp: NextPage = () => {
 
         toast({
           title: 'Cadastro realizado.',
-          description: "Você será redirecionado para a página de login.",
+          description: 'Você será redirecionado para a página de login.',
           status: 'success',
           duration: 3000,
           isClosable: true,
         })
 
         setTimeout(() => {
-          router.push('/entrar');
-        }, 3100);
+          router.push('/entrar')
+        }, 3100)
       } catch (error) {
         toast({
-          title: "Erro!",
+          title: 'Erro!',
           // @ts-ignore
           description: error.message,
-          status: "error",
+          status: 'error',
           duration: 3000,
           isClosable: true,
-        });
+        })
 
         setIsLoading(false)
       }
     },
-  });
+  })
 
   return (
     <Flex>
@@ -93,7 +105,10 @@ const SignUp: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainTemplate pathname={router.pathname} navbarVariant={NAVBAR_VARIANT.default}>
+      <MainTemplate
+        pathname={router.pathname}
+        navbarVariant={NAVBAR_VARIANT.default}
+      >
         <SimpleGrid
           columns={[1, 1, 2, 2]}
           alignItems={'center'}
@@ -128,24 +143,32 @@ const SignUp: NextPage = () => {
                 placeholder={'Maria Silva'}
                 labelVariant={'bgLight'}
                 variant={'outline'}
-                errorText={formik.touched.fullName ? formik.errors.fullName : undefined}
-                {...formik.getFieldProps("fullName")}
+                errorText={
+                  formik.touched.fullName ? formik.errors.fullName : undefined
+                }
+                {...formik.getFieldProps('fullName')}
               />
               <Input
                 label={'e-mail'}
                 placeholder={'maria@silva.com'}
                 labelVariant={'bgLight'}
                 variant={'outline'}
-                errorText={formik.touched.email  ? formik.errors.email : undefined}
-                {...formik.getFieldProps("email")}
+                errorText={
+                  formik.touched.email ? formik.errors.email : undefined
+                }
+                {...formik.getFieldProps('email')}
               />
               <Input
                 label={'confirmar e-mail'}
                 placeholder={'maria@silva.com'}
                 labelVariant={'bgLight'}
                 variant={'outline'}
-                errorText={formik.touched.confirmEmail  ? formik.errors.confirmEmail : undefined}
-                {...formik.getFieldProps("confirmEmail")}
+                errorText={
+                  formik.touched.confirmEmail
+                    ? formik.errors.confirmEmail
+                    : undefined
+                }
+                {...formik.getFieldProps('confirmEmail')}
               />
               <Input
                 label={'cpf'}
@@ -153,16 +176,18 @@ const SignUp: NextPage = () => {
                 labelVariant={'bgLight'}
                 variant={'outline'}
                 mask={'999.999.999-99'}
-                errorText={formik.touched.cpf  ? formik.errors.cpf : undefined}
-                {...formik.getFieldProps("cpf")}
+                errorText={formik.touched.cpf ? formik.errors.cpf : undefined}
+                {...formik.getFieldProps('cpf')}
               />
               <Input
                 label={'Data de nascimento'}
                 labelVariant={'bgLight'}
                 type={'date'}
                 variant={'outline'}
-                errorText={formik.touched.birthdate  ? formik.errors.birthdate : undefined}
-                {...formik.getFieldProps("birthdate")}
+                errorText={
+                  formik.touched.birthdate ? formik.errors.birthdate : undefined
+                }
+                {...formik.getFieldProps('birthdate')}
               />
               <Input
                 label={'senha'}
@@ -175,8 +200,10 @@ const SignUp: NextPage = () => {
                   </Flex>
                 }
                 type={showPass ? 'text' : 'password'}
-                errorText={formik.touched.password  ? formik.errors.password : undefined}
-                {...formik.getFieldProps("password")}
+                errorText={
+                  formik.touched.password ? formik.errors.password : undefined
+                }
+                {...formik.getFieldProps('password')}
               />
               <Input
                 label={'confirmar senha'}
@@ -189,11 +216,19 @@ const SignUp: NextPage = () => {
                 }
                 variant={'outline'}
                 type={showConfPass ? 'text' : 'password'}
-                errorText={formik.touched.confirmPassword  ? formik.errors.confirmPassword : undefined}
-                {...formik.getFieldProps("confirmPassword")}
+                errorText={
+                  formik.touched.confirmPassword
+                    ? formik.errors.confirmPassword
+                    : undefined
+                }
+                {...formik.getFieldProps('confirmPassword')}
               />
               <Flex gap={'12px'} flexDir={{ base: 'column', md: 'row' }}>
-                <Button isLoading={isLoading} type='submit' w={{ base: '100%', md: 'fit-content' }}>
+                <Button
+                  isLoading={isLoading}
+                  type="submit"
+                  w={{ base: '100%', md: 'fit-content' }}
+                >
                   Criar conta
                 </Button>
                 <Link href={'/entrar'}>

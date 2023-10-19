@@ -1,17 +1,17 @@
-import { Flex, SimpleGrid, Image, useToast, Text } from "@chakra-ui/react"
-import { NextPage } from "next"
-import Head from "next/head"
-import { useRouter } from "next/router"
-import MainTemplate from "../../../components/Template/MainTemplate"
-import { useCardStore } from "src/stores/card.store"
-import { useEffect, useState } from "react"
-import { useFormik } from "formik"
-import * as yup from "yup"
-import { CreateNotesDTO } from "src/interfaces/create-notes.dto"
-import { createNotes, findNotesByCardAndUser } from "src/service/notes.service"
-import { Textarea } from "src/components/Atom/Textarea"
-import { Button } from "src/components/Atom/Button"
-import { INotes } from "src/interfaces/notes.entity"
+import { Flex, SimpleGrid, Image, useToast, Text } from '@chakra-ui/react'
+import { NextPage } from 'next'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import MainTemplate from '../../../components/Template/MainTemplate'
+import { useCardStore } from 'src/stores/card.store'
+import { useEffect, useState } from 'react'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
+import { CreateNotesDTO } from 'src/interfaces/create-notes.dto'
+import { createNotes, findNotesByCardAndUser } from 'src/service/notes.service'
+import { Textarea } from 'src/components/Atom/Textarea'
+import { Button } from 'src/components/Atom/Button'
+import { INotes } from 'src/interfaces/notes.entity'
 
 const validationSchema = yup.object().shape({
   meaning: yup.string(),
@@ -27,7 +27,7 @@ const Cards: NextPage = () => {
   const toast = useToast()
   const { selectedCard } = useCardStore()
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [userId, setUserId] = useState<string | null>(null)
   const [notesData, setNotesData] = useState<CreateNotesDTO>({
     meaning: '',
@@ -37,8 +37,8 @@ const Cards: NextPage = () => {
     related_theme: '',
     additional_observation: '',
     card_id: '',
-    user_id: ''
-  });
+    user_id: '',
+  })
 
   const formik = useFormik({
     initialValues: {
@@ -49,7 +49,7 @@ const Cards: NextPage = () => {
       related_theme: notesData.related_theme,
       additional_observation: notesData.additional_observation,
       card_id: notesData.card_id,
-      user_id: notesData.user_id
+      user_id: notesData.user_id,
     },
     validationSchema,
     onSubmit: async (values: CreateNotesDTO) => {
@@ -62,44 +62,46 @@ const Cards: NextPage = () => {
 
         toast({
           title: 'Salvamento realizado.',
-          description: "Você salvou suas anotações com sucesso!",
+          description: 'Você salvou suas anotações com sucesso!',
           status: 'success',
           duration: 3000,
           isClosable: true,
         })
       } catch (error) {
         toast({
-          title: "Erro! Tente novamente.",
+          title: 'Erro! Tente novamente.',
           // @ts-ignore
           description: error.message,
-          status: "error",
+          status: 'error',
           duration: 3000,
           isClosable: true,
-        });
+        })
       } finally {
         setIsLoading(false)
       }
     },
-  });
+  })
 
   useEffect(() => {
     setUserId(localStorage.getItem('userId'))
-  }, []);
+  }, [])
 
   useEffect(() => {
     if (notesData) {
       formik.setValues(notesData)
     }
-  }, [notesData]);
+  }, [notesData])
 
   useEffect(() => {
     async function fetchData() {
       const localUserId = localStorage.getItem('userId')
 
-      setNotesData(await findNotesByCardAndUser(selectedCard.id, localUserId ?? "") ?? {})
+      setNotesData(
+        (await findNotesByCardAndUser(selectedCard.id, localUserId ?? '')) ?? {}
+      )
     }
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   return (
     <Flex>
@@ -137,44 +139,49 @@ const Cards: NextPage = () => {
                 placeholder={'O que a carta representa para você?'}
                 labelVariant={'bgLight'}
                 variant={'outline'}
-                {...formik.getFieldProps("meaning")}
+                {...formik.getFieldProps('meaning')}
               />
               <Textarea
                 label={'palavras-chave'}
                 placeholder={'Palavras curtas e diretas sobre a carta'}
                 labelVariant={'bgLight'}
                 variant={'outline'}
-                {...formik.getFieldProps("keywords")}
+                {...formik.getFieldProps('keywords')}
               />
               <Textarea
                 label={'Significado dos elementos'}
                 placeholder={'O que seus elementos simbolizam?'}
                 labelVariant={'bgLight'}
                 variant={'outline'}
-                {...formik.getFieldProps("elements_meaning")}
+                {...formik.getFieldProps('elements_meaning')}
               />
               <Textarea
                 label={'Significado em áreas específicas'}
                 placeholder={'O que ela simboliza na saúde ou amor?'}
                 labelVariant={'bgLight'}
                 variant={'outline'}
-                {...formik.getFieldProps("specific_meaning")}
+                {...formik.getFieldProps('specific_meaning')}
               />
               <Textarea
                 label={'tema relacionado'}
                 placeholder={'O que te faz lembrar dessa carta?'}
                 labelVariant={'bgLight'}
                 variant={'outline'}
-                {...formik.getFieldProps("related_theme")}
+                {...formik.getFieldProps('related_theme')}
               />
               <Textarea
                 label={'observações adicionais'}
                 placeholder={'O que mais você tem a dizer?'}
                 labelVariant={'bgLight'}
                 variant={'outline'}
-                {...formik.getFieldProps("additional_observation")}
+                {...formik.getFieldProps('additional_observation')}
               />
-              <Button alignSelf={'left'} isLoading={isLoading} type='submit' w={{ base: '100%', md: 'fit-content' }}>
+              <Button
+                alignSelf={'left'}
+                isLoading={isLoading}
+                type="submit"
+                w={{ base: '100%', md: 'fit-content' }}
+              >
                 Salvar
               </Button>
             </Flex>

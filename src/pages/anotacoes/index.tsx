@@ -10,7 +10,7 @@ import { findAllDecks } from 'src/service/deck.service'
 import { useEffect, useState } from 'react'
 import { useDeckStore } from 'src/stores/deck.store'
 
-const Notes: NextPage<{ decks: IDeck[]}> = ({ decks }) => {
+const Notes: NextPage<{ decks: IDeck[] }> = ({ decks }) => {
   const router = useRouter()
   const { addSelectedDeck } = useDeckStore()
 
@@ -28,7 +28,7 @@ const Notes: NextPage<{ decks: IDeck[]}> = ({ decks }) => {
 
   useEffect(() => {
     setToken(localStorage.getItem('token'))
-  }, []);
+  }, [])
 
   return (
     <Flex>
@@ -61,63 +61,64 @@ const Notes: NextPage<{ decks: IDeck[]}> = ({ decks }) => {
             </Text>
           </Flex>
           <Flex w={'100%'} flexDir={'column'} gap={'20px'}>
-          {decks.map((deck) => {
-            return (
-              <Box
-                position="relative"
-                maxH="245px"
-                w="full"
-                rounded="8px"
-                overflow="hidden"
-                key={deck.id}
-              >
-                <Image
-                  w={'100%'}
-                  h={'100%'}
-                  objectFit={'cover'}
-                  src={deck.imageUrl}
-                  objectPosition={deck.imagePosition}
-                  alt={`Imagem do oráculo ${deck.name.toLowerCase()}`}
-                />
+            {decks.map((deck) => {
+              return (
                 <Box
-                  position={'absolute'}
-                  bgGradient={
-                    'linear(to-r, rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50))'
-                  }
-                  top={'0'}
-                  left={'0'}
-                  right={'0'}
-                  bottom={'0'}
-                />
-                <Flex
-                  position={'absolute'}
-                  top={'0'}
-                  left={'0'}
-                  right={'0'}
-                  bottom={'0'}
-                  p={{ base: '16px', md: '24px' }}
-                  maxW={'340px'}
-                  gap={'16px'}
-                  flexDir={'column'}
+                  position="relative"
+                  maxH="245px"
+                  w="full"
+                  rounded="8px"
+                  overflow="hidden"
+                  key={deck.id}
                 >
-                  <Flex gap={'8px'} flexDir={'column'}>
-                    <Text textStyle={'heading3'} color={'neutral.white'}>
-                      {deck.name}
-                    </Text>
-                    <Text textStyle={'bodyLG'} color={'neutral.gray'}>
-                      {deck.description}
-                    </Text>
-                  </Flex>
-                  <Button
-                    w={{ base: '100%', md: 'fit-content' }}
-                    variant="secondary"
-                    onClick={() => handleClick(deck)}
+                  <Image
+                    w={'100%'}
+                    h={'100%'}
+                    objectFit={'cover'}
+                    src={deck.imageUrl}
+                    objectPosition={deck.imagePosition}
+                    alt={`Imagem do oráculo ${deck.name.toLowerCase()}`}
+                  />
+                  <Box
+                    position={'absolute'}
+                    bgGradient={
+                      'linear(to-r, rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50))'
+                    }
+                    top={'0'}
+                    left={'0'}
+                    right={'0'}
+                    bottom={'0'}
+                  />
+                  <Flex
+                    position={'absolute'}
+                    top={'0'}
+                    left={'0'}
+                    right={'0'}
+                    bottom={'0'}
+                    p={{ base: '16px', md: '24px' }}
+                    maxW={'340px'}
+                    gap={'16px'}
+                    flexDir={'column'}
                   >
-                    {token ? 'Selecionar' : 'Criar conta'}
-                  </Button>
-                </Flex>
-              </Box>
-            )})}
+                    <Flex gap={'8px'} flexDir={'column'}>
+                      <Text textStyle={'heading3'} color={'neutral.white'}>
+                        {deck.name}
+                      </Text>
+                      <Text textStyle={'bodyLG'} color={'neutral.gray'}>
+                        {deck.description}
+                      </Text>
+                    </Flex>
+                    <Button
+                      w={{ base: '100%', md: 'fit-content' }}
+                      variant="secondary"
+                      onClick={() => handleClick(deck)}
+                    >
+                      {token ? 'Selecionar' : 'Criar conta'}
+                    </Button>
+                  </Flex>
+                </Box>
+              )
+            })}
           </Flex>
         </Flex>
       </MainTemplate>
@@ -130,8 +131,8 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      decks
-    }
+      decks,
+    },
   }
 }
 

@@ -143,14 +143,14 @@ const Home: NextPage<{ testimonials: ITestimonial[] }> = ({ testimonials }) => {
             flexDir={{ base: 'column', md: 'row' }}
             justifyContent={'space-between'}
           >
-            {testimonials.map(({ name, state, message, id }) =>
+            {testimonials.map(({ name, state, message, id }) => (
               <Testimonial
                 state={name}
                 name={state}
                 testimonial={`"${message}"`}
                 key={id}
               />
-            )}
+            ))}
           </Flex>
         </Flex>
         <Flex
@@ -202,8 +202,8 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      testimonials
-    }
+      testimonials,
+    },
   }
 }
 

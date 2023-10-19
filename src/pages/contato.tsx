@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import MainTemplate from '../components/Template/MainTemplate'
 import { Button } from '../components/Atom/Button'
 import { Input } from '../components/Atom/Input'
-import * as yup from "yup"
+import * as yup from 'yup'
 import { Select } from '../components/Atom/Select'
 import { Textarea } from '../components/Atom/Textarea'
 import { useState } from 'react'
@@ -14,18 +14,21 @@ import { createContact } from 'src/service/contact.service'
 import { CreateContactDTO } from 'src/interfaces/create-contact.dto'
 
 const validationSchema = yup.object().shape({
-  email: yup.string().email("E-mail inválido").required("O e-mail é obrigatório"),
-  name: yup.string().required("O nome é obrigatório"),
-  message: yup.string().required("A mensagem é obrigatória"),
+  email: yup
+    .string()
+    .email('E-mail inválido')
+    .required('O e-mail é obrigatório'),
+  name: yup.string().required('O nome é obrigatório'),
+  message: yup.string().required('A mensagem é obrigatória'),
   state: yup.string(),
-  theme: yup.string().required("O tema é obrigatório"),
+  theme: yup.string().required('O tema é obrigatório'),
 })
 
 const Contact: NextPage = () => {
   const { pathname } = useRouter()
   const toast = useToast()
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const formik = useFormik({
     initialValues: {
@@ -43,7 +46,8 @@ const Contact: NextPage = () => {
 
         toast({
           title: 'Mensagem enviada.',
-          description: "Agradecemos pelo feedback! Entraremos em contato em breve.",
+          description:
+            'Agradecemos pelo feedback! Entraremos em contato em breve.',
           status: 'success',
           duration: 3000,
           isClosable: true,
@@ -52,18 +56,18 @@ const Contact: NextPage = () => {
         formik.resetForm()
       } catch (error) {
         toast({
-          title: "Erro! Tente novamente",
+          title: 'Erro! Tente novamente',
           // @ts-ignore
           description: error.message,
-          status: "error",
+          status: 'error',
           duration: 3000,
           isClosable: true,
-        });
+        })
       } finally {
         setIsLoading(false)
       }
     },
-  });
+  })
 
   return (
     <Flex>
@@ -128,8 +132,10 @@ const Contact: NextPage = () => {
                   labelVariant={'bgDark'}
                   placeholder="maria@silva.com"
                   w={'100%'}
-                  errorText={formik.touched.email  ? formik.errors.email : undefined}
-                  {...formik.getFieldProps("email")}
+                  errorText={
+                    formik.touched.email ? formik.errors.email : undefined
+                  }
+                  {...formik.getFieldProps('email')}
                 />
                 <Input
                   label={'Nome'}
@@ -137,40 +143,52 @@ const Contact: NextPage = () => {
                   labelVariant={'bgDark'}
                   w={'100%'}
                   variant={'bgDark'}
-                  errorText={formik.touched.name  ? formik.errors.name : undefined}
-                  {...formik.getFieldProps("name")}
+                  errorText={
+                    formik.touched.name ? formik.errors.name : undefined
+                  }
+                  {...formik.getFieldProps('name')}
                 />
                 <Select
                   labelVariant={'bgDark'}
                   label={'Assunto'}
                   placeholder={'Selecione um assunto'}
-                  errorText={formik.touched.theme  ? formik.errors.theme : undefined}
-                  {...formik.getFieldProps("theme")}
+                  errorText={
+                    formik.touched.theme ? formik.errors.theme : undefined
+                  }
+                  {...formik.getFieldProps('theme')}
                 >
                   <option value="relato">Relato</option>
                   <option value="suporte">Suporte</option>
                 </Select>
-                {
-                  formik.values.theme === "relato" ? (
-                    <Input
-                      label={'Estado'}
-                      placeholder="Rio de Janeiro"
-                      labelVariant={'bgDark'}
-                      w={'100%'}
-                      variant={'bgDark'}
-                      errorText={formik.touched.state  ? formik.errors.state : undefined}
-                      {...formik.getFieldProps("state")}
-                    />
-                  ) : (null)
-                }
+                {formik.values.theme === 'relato' ? (
+                  <Input
+                    label={'Estado'}
+                    placeholder="Rio de Janeiro"
+                    labelVariant={'bgDark'}
+                    w={'100%'}
+                    variant={'bgDark'}
+                    errorText={
+                      formik.touched.state ? formik.errors.state : undefined
+                    }
+                    {...formik.getFieldProps('state')}
+                  />
+                ) : null}
                 <Textarea
                   label={'Mensagem'}
                   labelVariant={'bgDark'}
                   placeholder={'Escreva sua mensagem'}
-                  errorText={formik.touched.message  ? formik.errors.message : undefined}
-                  {...formik.getFieldProps("message")}
+                  errorText={
+                    formik.touched.message ? formik.errors.message : undefined
+                  }
+                  {...formik.getFieldProps('message')}
                 />
-                <Button isLoading={isLoading} type={'submit'} w={'fit-content'} alignSelf={'left'} variant="rounded">
+                <Button
+                  isLoading={isLoading}
+                  type={'submit'}
+                  w={'fit-content'}
+                  alignSelf={'left'}
+                  variant="rounded"
+                >
                   Enviar
                 </Button>
               </Flex>

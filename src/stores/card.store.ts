@@ -1,6 +1,6 @@
-import { create } from "zustand"
-import { combine } from "zustand/middleware"
-import { ICard } from "src/interfaces/card.entity"
+import { create } from 'zustand'
+import { combine } from 'zustand/middleware'
+import { ICard } from 'src/interfaces/card.entity'
 
 export const useCardStore = create(
   combine(
@@ -12,7 +12,7 @@ export const useCardStore = create(
         set(() => ({
           selectedCard,
         })),
-      clear: () => set({ selectedCard: {} as ICard })
+      clear: () => set({ selectedCard: {} as ICard }),
     })
   )
 )

@@ -15,16 +15,25 @@ function MainTemplate({
   navbarVariant,
 }: MainTemplateProps) {
   const [userName, setUserName] = useState<string | null>(null)
-  const [navbarVariantDefault, setNavbarVariantDefault] = useState<NAVBAR_VARIANT>(NAVBAR_VARIANT.signUp)
+  const [navbarVariantDefault, setNavbarVariantDefault] =
+    useState<NAVBAR_VARIANT>(NAVBAR_VARIANT.signUp)
 
   useEffect(() => {
     setUserName(localStorage.getItem('name'))
-    setNavbarVariantDefault(localStorage.getItem('token') ? NAVBAR_VARIANT.logIn : NAVBAR_VARIANT.signUp)
-  }, []);
+    setNavbarVariantDefault(
+      localStorage.getItem('token')
+        ? NAVBAR_VARIANT.logIn
+        : NAVBAR_VARIANT.signUp
+    )
+  }, [])
 
   return (
     <Flex bgColor={'neutral.white'} flexDir={'column'} w={'100%'}>
-      <Navbar pathname={pathname} variant={navbarVariant ?? navbarVariantDefault} userName={userName} />
+      <Navbar
+        pathname={pathname}
+        variant={navbarVariant ?? navbarVariantDefault}
+        userName={userName}
+      />
       <Flex px={{ base: '16px', md: '96px' }} flexDir={'column'}>
         {children}
       </Flex>

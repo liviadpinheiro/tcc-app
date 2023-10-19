@@ -7,11 +7,7 @@ export interface TestimonialProps {
   testimonial: string
 }
 
-export const Testimonial = ({
-  state,
-  name,
-  testimonial,
-}: TestimonialProps) => {
+export const Testimonial = ({ state, name, testimonial }: TestimonialProps) => {
   return (
     <Flex
       maxW={{ base: '100%', md: '295px' }}

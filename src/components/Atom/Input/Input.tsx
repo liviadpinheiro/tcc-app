@@ -37,15 +37,17 @@ export const Input = ({
       <FormLabel variant={labelVariant}>{label}</FormLabel>
       <InputGroup flexDir={'column'}>
         {leftElement && <InputLeftElement>{leftElement}</InputLeftElement>}
-          {mask ? (
-            <ReactInputMask mask={mask} {...props}>
-              {/* @ts-ignore */}
-              {(inputProps: InputProps) => <ChakraInput {...inputProps} />}
-            </ReactInputMask>
-          ) : (
-            <ChakraInput {...props} />
-          )}
-        {errorText && <FormHelperText color={'red.500'}>{errorText}</FormHelperText>}
+        {mask ? (
+          <ReactInputMask mask={mask} {...props}>
+            {/* @ts-ignore */}
+            {(inputProps: InputProps) => <ChakraInput {...inputProps} />}
+          </ReactInputMask>
+        ) : (
+          <ChakraInput {...props} />
+        )}
+        {errorText && (
+          <FormHelperText color={'red.500'}>{errorText}</FormHelperText>
+        )}
         {rightElement && <InputRightElement>{rightElement}</InputRightElement>}
       </InputGroup>
     </FormControl>

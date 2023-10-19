@@ -25,10 +25,16 @@ export const Select = ({
   ...props
 }: SelectProps) => {
   return (
-    <FormControl flexDir={'column'} isInvalid={Boolean(errorText)} {...controlProps}>
+    <FormControl
+      flexDir={'column'}
+      isInvalid={Boolean(errorText)}
+      {...controlProps}
+    >
       <FormLabel variant={labelVariant}>{label}</FormLabel>
       <ChakraSelect {...props}>{children}</ChakraSelect>
-      {errorText && <FormHelperText color={'red.500'}>{errorText}</FormHelperText>}
+      {errorText && (
+        <FormHelperText color={'red.500'}>{errorText}</FormHelperText>
+      )}
     </FormControl>
   )
 }

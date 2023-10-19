@@ -23,10 +23,16 @@ export const Textarea = ({
   ...props
 }: TextareaProps) => {
   return (
-    <FormControl flexDir={'column'} isInvalid={Boolean(errorText)} {...controlProps}>
+    <FormControl
+      flexDir={'column'}
+      isInvalid={Boolean(errorText)}
+      {...controlProps}
+    >
       <FormLabel variant={labelVariant}>{label}</FormLabel>
       <ChakraTextarea {...props} />
-      {errorText && <FormHelperText color={'red.500'}>{errorText}</FormHelperText>}
+      {errorText && (
+        <FormHelperText color={'red.500'}>{errorText}</FormHelperText>
+      )}
     </FormControl>
   )
 }

@@ -1,6 +1,6 @@
-import { create } from "zustand"
-import { combine } from "zustand/middleware"
-import { IDeck } from "src/interfaces/deck.entity"
+import { create } from 'zustand'
+import { combine } from 'zustand/middleware'
+import { IDeck } from 'src/interfaces/deck.entity'
 
 export const useDeckStore = create(
   combine(
@@ -17,7 +17,7 @@ export const useDeckStore = create(
         set(() => ({
           selectedDeck,
         })),
-      clear: () => set({ decks: [], selectedDeck: {} as IDeck })
+      clear: () => set({ decks: [], selectedDeck: {} as IDeck }),
     })
   )
 )

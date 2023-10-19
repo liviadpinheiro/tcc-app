@@ -1,13 +1,13 @@
-import { Flex, Img, SimpleGrid, Text } from "@chakra-ui/react"
-import { NextPage } from "next"
-import Head from "next/head"
-import { useRouter } from "next/router"
-import MainTemplate from "../../components/Template/MainTemplate"
-import { Input } from "../../components/Atom/Input"
-import { Select } from "../../components/Atom/Select"
-import { Button } from "../../components/Atom/Button"
-import { useEffect, useState } from "react"
-import Link from "next/link"
+import { Flex, Img, SimpleGrid, Text } from '@chakra-ui/react'
+import { NextPage } from 'next'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import MainTemplate from '../../components/Template/MainTemplate'
+import { Input } from '../../components/Atom/Input'
+import { Select } from '../../components/Atom/Select'
+import { Button } from '../../components/Atom/Button'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 const Spread: NextPage = () => {
   const { pathname } = useRouter()
@@ -16,7 +16,7 @@ const Spread: NextPage = () => {
 
   useEffect(() => {
     setToken(localStorage.getItem('token'))
-  }, []);
+  }, [])
   return (
     <Flex>
       <Head>
@@ -28,7 +28,7 @@ const Spread: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainTemplate pathname={pathname}>
-      <Flex
+        <Flex
           flexDir={'column'}
           maxW={'554px'}
           gap={'8px'}
@@ -44,7 +44,10 @@ const Spread: NextPage = () => {
             registre todas as suas tiragens
           </Text>
           <Text textAlign={'center'} textStyle={'bodyLG'}>
-            Esta ferramenta única facilitará muito o dia-a-dia de trabalho e estudo, principalmente na interação com o consulente. Você poderá exportar a tiragem em PDF ou enviar diretamente para o consulente através do e-mail.
+            Esta ferramenta única facilitará muito o dia-a-dia de trabalho e
+            estudo, principalmente na interação com o consulente. Você poderá
+            exportar a tiragem em PDF ou enviar diretamente para o consulente
+            através do e-mail.
           </Text>
         </Flex>
         <Flex

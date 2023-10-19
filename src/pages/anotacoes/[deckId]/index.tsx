@@ -1,17 +1,17 @@
-import { Box, Flex, Text } from "@chakra-ui/react"
-import { GetServerSidePropsContext, NextPage } from "next"
-import Head from "next/head"
-import { useRouter } from "next/router"
-import MainTemplate from "../../../components/Template/MainTemplate"
-import { findAllDeckCards } from "src/service/card.service"
-import { ICard } from "src/interfaces/card.entity"
-import { UUID } from "crypto"
-import { useDeckStore } from "src/stores/deck.store"
-import { Button } from "src/components/Atom/Button"
-import { useEffect, useState } from "react"
-import { useCardStore } from "src/stores/card.store"
+import { Box, Flex, Text } from '@chakra-ui/react'
+import { GetServerSidePropsContext, NextPage } from 'next'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import MainTemplate from '../../../components/Template/MainTemplate'
+import { findAllDeckCards } from 'src/service/card.service'
+import { ICard } from 'src/interfaces/card.entity'
+import { UUID } from 'crypto'
+import { useDeckStore } from 'src/stores/deck.store'
+import { Button } from 'src/components/Atom/Button'
+import { useEffect, useState } from 'react'
+import { useCardStore } from 'src/stores/card.store'
 
-const Cards: NextPage<{ cards: ICard[]}> = ({ cards }) => {
+const Cards: NextPage<{ cards: ICard[] }> = ({ cards }) => {
   const router = useRouter()
   const { selectedDeck } = useDeckStore()
   const { addSelectedCard } = useCardStore()
@@ -30,7 +30,7 @@ const Cards: NextPage<{ cards: ICard[]}> = ({ cards }) => {
 
   useEffect(() => {
     setToken(localStorage.getItem('token'))
-  }, []);
+  }, [])
 
   return (
     <Flex>
@@ -43,7 +43,7 @@ const Cards: NextPage<{ cards: ICard[]}> = ({ cards }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <MainTemplate pathname={router.pathname}>
-      <Flex
+        <Flex
           gap={'36px'}
           flexDir={'column'}
           w={'100%'}
@@ -58,60 +58,58 @@ const Cards: NextPage<{ cards: ICard[]}> = ({ cards }) => {
               {selectedDeck.name?.toLowerCase()}
             </Text>
             <Text textStyle={'bodyLG'}>
-              Escolha qual carta você deseja estudar hoje, suas anotações ficarão salvas conosco!
+              Escolha qual carta você deseja estudar hoje, suas anotações
+              ficarão salvas conosco!
             </Text>
           </Flex>
           <Flex w={'100%'} flexDir={'column'} gap={'20px'}>
-          {cards?.map((card) => {
-            return (
-              <Box
-                position="relative"
-                h="90px"
-                w="100%"
-                rounded="8px"
-                overflow="hidden"
-                key={card.id}
-              >
+            {cards?.map((card) => {
+              return (
                 <Box
-                  w={'100%'}
-                  h={'100%'}
-                  bgColor={'primary.default'}
-                />
-                <Box
-                  position={'absolute'}
-                  bgGradient={
-                    'linear(to-r, rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50))'
-                  }
-                  top={'0'}
-                  left={'0'}
-                  right={'0'}
-                  bottom={'0'}
-                />
-                <Flex
-                  position={'absolute'}
-                  top={'0'}
-                  left={'0'}
-                  right={'0'}
-                  bottom={'0'}
-                  p={{ base: '16px', md: '24px' }}
-                  gap={'16px'}
-                  flexDir={{ base: 'column', sm: 'row' }}
-                  alignItems={'center'}
-                  justifyContent={'space-between'}
+                  position="relative"
+                  h="90px"
+                  w="100%"
+                  rounded="8px"
+                  overflow="hidden"
+                  key={card.id}
                 >
-                  <Text textStyle={'heading3'} color={'neutral.white'}>
-                    {card.number}. {card.name}
-                  </Text>
-                  <Button
-                    w={{ base: '100%', sm: 'fit-content' }}
-                    variant="secondary"
-                    onClick={() => handleClick(card)}
+                  <Box w={'100%'} h={'100%'} bgColor={'primary.default'} />
+                  <Box
+                    position={'absolute'}
+                    bgGradient={
+                      'linear(to-r, rgba(0, 0, 0, 0.50), rgba(0, 0, 0, 0.50))'
+                    }
+                    top={'0'}
+                    left={'0'}
+                    right={'0'}
+                    bottom={'0'}
+                  />
+                  <Flex
+                    position={'absolute'}
+                    top={'0'}
+                    left={'0'}
+                    right={'0'}
+                    bottom={'0'}
+                    p={{ base: '16px', md: '24px' }}
+                    gap={'16px'}
+                    flexDir={{ base: 'column', sm: 'row' }}
+                    alignItems={'center'}
+                    justifyContent={'space-between'}
                   >
-                    Selecionar
-                  </Button>
-                </Flex>
-              </Box>
-            )})}
+                    <Text textStyle={'heading3'} color={'neutral.white'}>
+                      {card.number}. {card.name}
+                    </Text>
+                    <Button
+                      w={{ base: '100%', sm: 'fit-content' }}
+                      variant="secondary"
+                      onClick={() => handleClick(card)}
+                    >
+                      Selecionar
+                    </Button>
+                  </Flex>
+                </Box>
+              )
+            })}
           </Flex>
         </Flex>
       </MainTemplate>
@@ -126,8 +124,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   return {
     props: {
-      cards
-    }
+      cards,
+    },
   }
 }
 
