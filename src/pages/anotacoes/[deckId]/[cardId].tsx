@@ -76,7 +76,7 @@ const Cards: NextPage = () => {
           isClosable: true,
         });
       } finally {
-        setIsLoading(true)
+        setIsLoading(false)
       }
     },
   });
