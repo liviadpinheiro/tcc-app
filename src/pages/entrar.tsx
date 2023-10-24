@@ -82,6 +82,9 @@ const LogIn: NextPage = () => {
       <MainTemplate
         pathname={router.pathname}
         navbarVariant={NAVBAR_VARIANT.default}
+        alignItems={'center'}
+        h={'100vh'}
+        justifyContent={'space-between'}
       >
         <form onSubmit={formik.handleSubmit}>
           <Flex
