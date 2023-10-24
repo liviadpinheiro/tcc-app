@@ -29,7 +29,7 @@ const textStyles = {
     fontSize: '12px',
     lineHeight: 'auto',
   },
-  'body-LG-regular': {
+  bodyLG: {
     fontFamily: 'body',
     fontSize: '18px',
     lineHeight: '24px',
