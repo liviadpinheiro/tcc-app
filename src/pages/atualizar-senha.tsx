@@ -28,6 +28,7 @@ const AtualizarSenha: NextPage = () => {
   const router = useRouter()
   const toast = useToast()
 
+  const [isLoading, setIsLoading] = useState(false)
   const [showPass, setShowPass] = useState(false)
   const [showConfPass, setShowConfPass] = useState(false)
   const handleClickPass = () => setShowPass(!showPass)
@@ -64,6 +65,8 @@ const AtualizarSenha: NextPage = () => {
           duration: 3000,
           isClosable: true,
         })
+
+        setIsLoading(false)
       }
     },
   })
@@ -118,7 +121,7 @@ const AtualizarSenha: NextPage = () => {
                 {...formik.getFieldProps('confirmPassword')}
               />
               <Flex alignItems={'center'} gap={'12px'}>
-                <Button type={'submit'}>Atualizar senha</Button>
+                <Button onClick={() => setIsLoading(true)} isLoading={isLoading} type={'submit'}>Atualizar senha</Button>
               </Flex>
             </Flex>
           </form>
