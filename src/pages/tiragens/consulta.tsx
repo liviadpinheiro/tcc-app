@@ -154,6 +154,7 @@ const Consulta: NextPage = () => {
             variant={'outline'}
             placeholder={'A Estrela'}
             errorText={
+              // @ts-ignore
               formik.touched.cards && formik.errors.cards && formik.errors.cards[i] ? formik.errors.cards[i].name : undefined
             }
             {...formik.getFieldProps(`cards.${i}.name`)}
@@ -164,6 +165,7 @@ const Consulta: NextPage = () => {
             variant={'outline'}
             placeholder={'Esperanças e temores'}
             errorText={
+              // @ts-ignore
               formik.touched.cards && formik.errors.cards && formik.errors.cards[i] ? formik.errors.cards[i]?.position : undefined
             }
             {...formik.getFieldProps(`cards.${i}.position`)}
@@ -174,6 +176,7 @@ const Consulta: NextPage = () => {
             variant={'outline'}
             placeholder={'O que essa carta tem a dizer para o consulente?'}
             errorText={
+              // @ts-ignore
               formik.touched.cards && formik.errors.cards && formik.errors.cards[i] ? formik.errors.cards[i]?.meaning : undefined
             }
             {...formik.getFieldProps(`cards.${i}.meaning`)}
