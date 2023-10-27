@@ -7,12 +7,52 @@ import { Input } from '../../components/Atom/Input'
 import { Select } from '../../components/Atom/Select'
 import { Button } from '../../components/Atom/Button'
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
+import * as yup from 'yup'
+import { useFormik } from 'formik'
+import { useSpreadStore } from 'src/stores/spread.store'
+import { IBeforeSpread } from 'src/interfaces/before-spread.entity'
+import { findAllDecks } from 'src/service/deck.service'
+import { IDeck } from 'src/interfaces/deck.entity'
 
-const Spread: NextPage = () => {
-  const { pathname } = useRouter()
+const validationSchema = yup.object().shape({
+  consultantName: yup.string().required('O nome é obrigatório'),
+  consultantBirthdate: yup
+    .date()
+    .max(new Date(), 'A data de nascimento não pode ser no futuro')
+    .required('A data de nascimento é obrigatória'),
+    consultantEmail: yup
+    .string()
+    .email('E-mail inválido')
+    .required('O e-mail do consulente é obrigatório'),
+  deck: yup.string().required('O oráculo é obrigatório'),
+  theme: yup.string().required('O tema é obrigatório'),
+  spread: yup.string().required('O nome da tiragem é obrigatório'),
+})
+
+const Spread: NextPage<{ decks: IDeck[] }> = ({ decks }) => {
+  const router = useRouter()
+  const { addSpreadInfo } = useSpreadStore()
 
   const [token, setToken] = useState<string | null>(null)
+
+  const formik = useFormik({
+    initialValues: {
+      consultantName: '',
+      consultantBirthdate: undefined,
+      consultantEmail: '',
+      deck: '',
+      theme: '',
+      spread: '',
+    },
+    validationSchema,
+    onSubmit: async (values: IBeforeSpread) => {
+      if (!token) router.push('/cadastrar')
+
+      addSpreadInfo(values)
+
+      router.push('/tiragens/consulta')
+    },
+  })
 
   useEffect(() => {
     setToken(localStorage.getItem('token'))
@@ -27,7 +67,7 @@ const Spread: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainTemplate pathname={pathname}>
+      <MainTemplate pathname={router.pathname}>
         <Flex
           flexDir={'column'}
           maxW={'554px'}
@@ -75,60 +115,98 @@ const Spread: NextPage = () => {
               rounded={'8px'}
               src="/images/spread.jpg"
             />
-            <Flex flexDir={'column'} gap={'24px'}>
-              <Input
-                label={'Nome do consulente'}
-                placeholder="João Silva"
-                variant={'bgDark'}
-                w={'100%'}
-              />
-              <Input
-                label={'Data de nascimento do consulente'}
-                w={'100%'}
-                variant={'bgDark'}
-                type={'date'}
-              />
-              <Input
-                label={'E-mail do consulente'}
-                placeholder="joao@silva.com"
-                variant={'bgDark'}
-                w={'100%'}
-                type={'email'}
-              />
-              <Select label={'Oráculo'} placeholder={'Selecione um oráculo'}>
-                <option value="taro">Tarô</option>
-                <option value="baralho-cigano">Baralho Cigano</option>
-              </Select>
-              <Input
-                label={'Tema da consulta'}
-                placeholder="Pergunta ou tópico geral"
-                variant={'bgDark'}
-                w={'100%'}
-              />
-              <Input
-                label={'Nome da tiragem'}
-                placeholder="Nome ou descrição da tiragem"
-                variant={'bgDark'}
-                w={'100%'}
-              />
-              <Input
-                label={'Número de cartas'}
-                placeholder="0"
-                variant={'bgDark'}
-                w={'100%'}
-                type="number"
-              />
-              <Link href={token ? '/tiragens/consulta' : '/cadastrar'}>
-                <Button w={'fit-content'} alignSelf={'left'} variant="rounded">
-                  {token ? 'Enviar' : 'Criar conta'}
-                </Button>
-              </Link>
-            </Flex>
+            <form onSubmit={formik.handleSubmit}>
+              <Flex flexDir={'column'} gap={'24px'}>
+                <Input
+                  label={'Nome do consulente'}
+                  placeholder="João Silva"
+                  variant={'bgDark'}
+                  labelVariant={'bgDark'}
+                  w={'100%'}
+                  errorText={
+                    formik.touched.consultantName ? formik.errors.consultantName : undefined
+                  }
+                  {...formik.getFieldProps('consultantName')}
+                />
+                <Input
+                  label={'Data de nascimento do consulente'}
+                  w={'100%'}
+                  variant={'bgDark'}
+                  labelVariant={'bgDark'}
+                  type={'date'}
+                  errorText={
+                    formik.touched.consultantBirthdate ? formik.errors.consultantBirthdate : undefined
+                  }
+                  {...formik.getFieldProps('consultantBirthdate')}
+                />
+                <Input
+                  label={'E-mail do consulente'}
+                  placeholder="joao@silva.com"
+                  variant={'bgDark'}
+                  labelVariant={'bgDark'}
+                  w={'100%'}
+                  errorText={
+                    formik.touched.consultantEmail ? formik.errors.consultantEmail : undefined
+                  }
+                  {...formik.getFieldProps('consultantEmail')}
+                />
+                <Select
+                  labelVariant={'bgDark'}
+                  label={'Oráculo'}
+                  placeholder={'Selecione um oráculo'}
+                  errorText={
+                    formik.touched.deck ? formik.errors.deck : undefined
+                  }
+                  {...formik.getFieldProps('deck')}
+                >
+                  {decks.map(deck =>
+                    <option key={deck.id} value={deck.name}>{deck.name}</option>
+                  )}
+                </Select>
+                <Input
+                  label={'Tema da consulta'}
+                  placeholder="Pergunta ou tópico geral"
+                  variant={'bgDark'}
+                  labelVariant={'bgDark'}
+                  w={'100%'}
+                  errorText={
+                    formik.touched.theme ? formik.errors.theme : undefined
+                  }
+                  {...formik.getFieldProps('theme')}
+                />
+                <Input
+                  label={'Nome da tiragem'}
+                  placeholder="Nome ou descrição da tiragem"
+                  variant={'bgDark'}
+                  labelVariant={'bgDark'}
+                  w={'100%'}
+                  errorText={
+                    formik.touched.spread ? formik.errors.spread : undefined
+                  }
+                  {...formik.getFieldProps('spread')}
+                />
+                <Flex>
+                  <Button type={'submit'} w={'fit-content'} alignSelf={'left'} variant="rounded">
+                    {token ? 'Enviar' : 'Criar conta'}
+                  </Button>
+                </Flex>
+              </Flex>
+            </form>
           </SimpleGrid>
         </Flex>
       </MainTemplate>
     </Flex>
   )
+}
+
+export async function getServerSideProps() {
+  const decks: IDeck[] = await findAllDecks()
+
+  return {
+    props: {
+      decks,
+    },
+  }
 }
 
 export default Spread
