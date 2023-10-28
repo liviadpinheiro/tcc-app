@@ -25,12 +25,16 @@ import { useFormik } from 'formik'
 import { useEffect, useState } from 'react'
 import { ArrowUpIcon } from 'public/icons/arrow-up'
 import { ISpread } from 'src/interfaces/spread.entity'
-import { generateSpreadPDF } from 'src/service/spread.service'
+import { generateSpreadPDF, sendSpreadMail } from 'src/service/spread.service'
 import { CreateSpreadDTO } from 'src/interfaces/create-spread.dto'
 import { resizeImage } from 'src/utils/resize-image'
 import { convertImageToBase64 } from 'src/utils/image-to-base64'
 
-const PDFModal = ({ pdfBlob, isOpen, onClose }: { pdfBlob: Blob | null, isOpen: boolean, onClose: () => void }) => {
+const PDFModal = ({ email, pdfBlob, isOpen, onClose }: { email: string, pdfBlob: Blob | null, isOpen: boolean, onClose: () => void }) => {
+  const toast = useToast()
+
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+
   const downloadPDF = () => {
     if (pdfBlob) {
       const link = document.createElement('a');
@@ -39,6 +43,37 @@ const PDFModal = ({ pdfBlob, isOpen, onClose }: { pdfBlob: Blob | null, isOpen: 
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+    }
+  }
+
+  const sendPDF = async () => {
+    if (pdfBlob) {
+      const formData = new FormData()
+      formData.append('pdf', pdfBlob)
+      formData.append('email', email)
+
+      try {
+        await sendSpreadMail(formData)
+
+        toast({
+          title: 'E-mail enviado com sucesso!',
+          description: 'Se o PDF não chegar em até 3 minutos, tente novamente',
+          status: 'success',
+          duration: 6000,
+          isClosable: true,
+        })
+      } catch (error) {
+        toast({
+          title: 'Erro!',
+          // @ts-ignore
+          description: error.message,
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
+      } finally {
+        setIsLoading(false)
+      }
     }
   }
 
@@ -55,7 +90,7 @@ const PDFModal = ({ pdfBlob, isOpen, onClose }: { pdfBlob: Blob | null, isOpen: 
                 <Button variant='primary' onClick={downloadPDF}>
                     Fazer Download
                 </Button>
-                <Button variant="secondary">
+                <Button isLoading={isLoading} variant="secondary" onClick={sendPDF}>
                     Enviar por e-mail
                 </Button>
             </ModalFooter>
@@ -314,7 +349,7 @@ const Consulta: NextPage = () => {
                 >
                   Gerar PDF
                 </Button>
-                <PDFModal pdfBlob={pdfBlob} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+                <PDFModal email={spreadInfo.consultantEmail} pdfBlob={pdfBlob} isOpen={isOpen} onClose={() => setIsOpen(false)} />
               </Flex>
             </Flex>
         </SimpleGrid>
