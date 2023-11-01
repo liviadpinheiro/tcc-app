@@ -16,8 +16,8 @@ export const generateSpreadPDF = async (
 
     return blob
   } catch (error) {
-    // @ts-ignore
     throw new Error(
+      // @ts-ignore
       error.response.data.message || 'Erro ao gerar pdf da tiragem'
     )
   }
@@ -32,8 +32,8 @@ export const sendSpreadMail = async (spreadData: FormData) => {
 
     return response.data
   } catch (error) {
-    // @ts-ignore
     throw new Error(
+      // @ts-ignore
       error.response.data.message || 'Erro ao enviar pdf da tiragem por e-mail'
     )
   }
