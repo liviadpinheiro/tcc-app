@@ -18,6 +18,11 @@ const Button = defineStyleConfig({
       _hover: {
         bgColor: 'primary.hover',
       },
+      _loading: {
+        _hover: {
+          bgColor: 'primary.default',
+        },
+      },
     },
     secondary: {
       bgColor: 'neutral.white',

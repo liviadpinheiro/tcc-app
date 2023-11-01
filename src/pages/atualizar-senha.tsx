@@ -1,17 +1,17 @@
-import { Flex, Text, useToast } from "@chakra-ui/react"
-import { NextPage } from "next"
-import Head from "next/head"
-import { useRouter } from "next/router"
-import MainTemplate from "../components/Template/MainTemplate"
-import { Input } from "src/components/Atom/Input"
-import { Button } from "src/components/Atom/Button"
-import { useFormik } from "formik"
+import { Flex, Text, useToast } from '@chakra-ui/react'
+import { NextPage } from 'next'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import MainTemplate from '../components/Template/MainTemplate'
+import { Input } from 'src/components/Atom/Input'
+import { Button } from 'src/components/Atom/Button'
+import { useFormik } from 'formik'
 import * as yup from 'yup'
-import { useState } from "react"
-import { updatePassword } from "src/service/user.service"
-import { CustomHideIcon } from "public/icons/hide"
-import { CustomShowIcon } from "public/icons/show"
-import { NAVBAR_VARIANT } from "src/components/Organism/Navbar"
+import { useState } from 'react'
+import { updatePassword } from 'src/service/user.service'
+import { CustomHideIcon } from 'public/icons/hide'
+import { CustomShowIcon } from 'public/icons/show'
+import { NAVBAR_VARIANT } from 'src/components/Organism/Navbar'
 
 const validationSchema = yup.object().shape({
   password: yup
@@ -37,13 +37,13 @@ const AtualizarSenha: NextPage = () => {
   const formik = useFormik({
     initialValues: {
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
     },
     validationSchema,
     onSubmit: async (values) => {
       try {
-        const { token } = router.query;
-        await updatePassword(token as string ?? '', values.password)
+        const { token } = router.query
+        await updatePassword((token as string) ?? '', values.password)
 
         toast({
           title: 'Atualização realizada.',
@@ -81,9 +81,27 @@ const AtualizarSenha: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MainTemplate pathname={router.pathname} navbarVariant={NAVBAR_VARIANT.default} alignItems={'center'} h={'100vh'} justifyContent={'space-between'}>
-      <Flex gap={{ base: '36px', md: '24px' }} w={'100%'} h={'100%'} flexDir={'column'} maxW={'936px'} alignItems={'center'}>
-          <Text color={'primary.default'} textStyle={{ base: 'heading2', md: 'heading1' }}>recupere sua senha</Text>
+      <MainTemplate
+        pathname={router.pathname}
+        navbarVariant={NAVBAR_VARIANT.default}
+        alignItems={'center'}
+        h={'100vh'}
+        justifyContent={'space-between'}
+      >
+        <Flex
+          gap={{ base: '36px', md: '24px' }}
+          w={'100%'}
+          h={'100%'}
+          flexDir={'column'}
+          maxW={'936px'}
+          alignItems={'center'}
+        >
+          <Text
+            color={'primary.default'}
+            textStyle={{ base: 'heading2', md: 'heading1' }}
+          >
+            recupere sua senha
+          </Text>
           <form onSubmit={formik.handleSubmit}>
             <Flex flexDir={'column'} gap={'24px'}>
               <Input
@@ -121,7 +139,13 @@ const AtualizarSenha: NextPage = () => {
                 {...formik.getFieldProps('confirmPassword')}
               />
               <Flex alignItems={'center'} gap={'12px'}>
-                <Button onClick={() => setIsLoading(true)} isLoading={isLoading} type={'submit'}>Atualizar senha</Button>
+                <Button
+                  onClick={() => setIsLoading(true)}
+                  isLoading={isLoading}
+                  type={'submit'}
+                >
+                  Atualizar senha
+                </Button>
               </Flex>
             </Flex>
           </form>

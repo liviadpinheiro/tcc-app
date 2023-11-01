@@ -30,19 +30,29 @@ import { CreateSpreadDTO } from 'src/interfaces/create-spread.dto'
 import { resizeImage } from 'src/utils/resize-image'
 import { convertImageToBase64 } from 'src/utils/image-to-base64'
 
-const PDFModal = ({ email, pdfBlob, isOpen, onClose }: { email: string, pdfBlob: Blob | null, isOpen: boolean, onClose: () => void }) => {
+const PDFModal = ({
+  email,
+  pdfBlob,
+  isOpen,
+  onClose,
+}: {
+  email: string
+  pdfBlob: Blob | null
+  isOpen: boolean
+  onClose: () => void
+}) => {
   const toast = useToast()
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const downloadPDF = () => {
     if (pdfBlob) {
-      const link = document.createElement('a');
-      link.href = URL.createObjectURL(pdfBlob);
-      link.download = 'tiragem.pdf';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const link = document.createElement('a')
+      link.href = URL.createObjectURL(pdfBlob)
+      link.download = 'tiragem.pdf'
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
     }
   }
 
@@ -79,37 +89,42 @@ const PDFModal = ({ email, pdfBlob, isOpen, onClose }: { email: string, pdfBlob:
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-            <ModalHeader>PDF Gerado com Sucesso!</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              Agora você pode fazer o download do arquivo com os dados da sua tiragem ou enviar diretamente para o e-mail do cliente que foi inserido nos dados iniciais da consulta.
-            </ModalBody>
-            <ModalFooter gap={'16px'}>
-                <Button variant='primary' onClick={downloadPDF}>
-                    Fazer Download
-                </Button>
-                <Button isLoading={isLoading} variant="secondary" onClick={sendPDF}>
-                    Enviar por e-mail
-                </Button>
-            </ModalFooter>
-        </ModalContent>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>PDF Gerado com Sucesso!</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>
+          Agora você pode fazer o download do arquivo com os dados da sua
+          tiragem ou enviar diretamente para o e-mail do cliente que foi
+          inserido nos dados iniciais da consulta.
+        </ModalBody>
+        <ModalFooter gap={'16px'}>
+          <Button variant="primary" onClick={downloadPDF}>
+            Fazer Download
+          </Button>
+          <Button isLoading={isLoading} variant="secondary" onClick={sendPDF}>
+            Enviar por e-mail
+          </Button>
+        </ModalFooter>
+      </ModalContent>
     </Modal>
-);
+  )
 }
 
 const validationSchema = yup.object().shape({
   spreadOverview: yup.string().required('O resumo é obrigatório'),
   cardsNumber: yup.number().min(1, 'O jogo deve ter pelo menos uma carta'),
   image: yup.string(),
-  cards: yup.array().of(
-    yup.object().shape({
-      name: yup.string().required('Nome da carta é obrigatório'),
-      position: yup.string().required('Posição na tiragem é obrigatória'),
-      meaning: yup.string().required('Significado é obrigatório')
-    })
-  ).required('Insira as informações das cartas')
+  cards: yup
+    .array()
+    .of(
+      yup.object().shape({
+        name: yup.string().required('Nome da carta é obrigatório'),
+        position: yup.string().required('Posição na tiragem é obrigatória'),
+        meaning: yup.string().required('Significado é obrigatório'),
+      })
+    )
+    .required('Insira as informações das cartas'),
 })
 
 const Consulta: NextPage = () => {
@@ -119,28 +134,28 @@ const Consulta: NextPage = () => {
   const { spreadInfo } = useSpreadStore()
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [file, setFile] = useState<string | undefined>("")
+  const [file, setFile] = useState<string | undefined>('')
   const [pdfBlob, setPdfBlob] = useState<Blob | null>(null)
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const handleFileChange = async (e: any) => {
-    const file = e.target.files[0];
+    const file = e.target.files[0]
 
     if (!file) return
 
     const resizedImage = await resizeImage(file)
     const base64Image = await convertImageToBase64(resizedImage)
 
-    setFile(base64Image);
-    formik.setFieldValue('image', base64Image);
-  };
+    setFile(base64Image)
+    formik.setFieldValue('image', base64Image)
+  }
 
   const formik = useFormik<ISpread>({
     initialValues: {
       spreadOverview: '',
       cardsNumber: 1,
       image: '',
-      cards: []
+      cards: [],
     },
     validationSchema,
     onSubmit: async (values) => {
@@ -151,10 +166,10 @@ const Consulta: NextPage = () => {
           consultantBirthdate: spreadInfo.consultantBirthdate,
           deck: spreadInfo.deck,
           theme: spreadInfo.theme,
-          spread: spreadInfo. spread,
+          spread: spreadInfo.spread,
           spreadOverview: values.spreadOverview,
           image: values.image,
-          cards: values.cards
+          cards: values.cards,
         }
 
         const pdf = await generateSpreadPDF(req)
@@ -177,12 +192,14 @@ const Consulta: NextPage = () => {
   })
 
   const renderCardFields = () => {
-    const cardFields = [];
+    const cardFields = []
 
     for (let i = 0; i < formik.values.cardsNumber; i++) {
       cardFields.push(
         <Flex flexDir={'column'} key={i} mt={4} gap={'12px'}>
-          <Text color={'primary.default'} textStyle={'heading4'}>{`Carta ${i + 1}`}</Text>
+          <Text color={'primary.default'} textStyle={'heading4'}>{`Carta ${
+            i + 1
+          }`}</Text>
           <Input
             label="Nome da Carta"
             labelVariant={'bgLight'}
@@ -190,7 +207,11 @@ const Consulta: NextPage = () => {
             placeholder={'A Estrela'}
             errorText={
               // @ts-ignore
-              formik.touched.cards && formik.errors.cards && formik.errors.cards[i] ? formik.errors.cards[i].name : undefined
+              formik.touched.cards &&
+              formik.errors.cards &&
+              formik.errors.cards[i]
+                ? formik.errors.cards[i].name
+                : undefined
             }
             {...formik.getFieldProps(`cards.${i}.name`)}
           />
@@ -201,7 +222,11 @@ const Consulta: NextPage = () => {
             placeholder={'Esperanças e temores'}
             errorText={
               // @ts-ignore
-              formik.touched.cards && formik.errors.cards && formik.errors.cards[i] ? formik.errors.cards[i]?.position : undefined
+              formik.touched.cards &&
+              formik.errors.cards &&
+              formik.errors.cards[i]
+                ? formik.errors.cards[i]?.position
+                : undefined
             }
             {...formik.getFieldProps(`cards.${i}.position`)}
           />
@@ -212,25 +237,29 @@ const Consulta: NextPage = () => {
             placeholder={'O que essa carta tem a dizer para o consulente?'}
             errorText={
               // @ts-ignore
-              formik.touched.cards && formik.errors.cards && formik.errors.cards[i] ? formik.errors.cards[i]?.meaning : undefined
+              formik.touched.cards &&
+              formik.errors.cards &&
+              formik.errors.cards[i]
+                ? formik.errors.cards[i]?.meaning
+                : undefined
             }
             {...formik.getFieldProps(`cards.${i}.meaning`)}
           />
         </Flex>
-      );
+      )
     }
 
-    return cardFields;
-  };
+    return cardFields
+  }
 
   useEffect(() => {
-  const newCards = [...Array(formik.values.cardsNumber)].map((_, i) =>
-    formik.values.cards[i] || { name: '', position: '', meaning: '' }
-  );
+    const newCards = [...Array(formik.values.cardsNumber)].map(
+      (_, i) =>
+        formik.values.cards[i] || { name: '', position: '', meaning: '' }
+    )
 
-  formik.setFieldValue('cards', newCards);
-}, [formik.values.cardsNumber]);
-
+    formik.setFieldValue('cards', newCards)
+  }, [formik.values.cardsNumber])
 
   return (
     <Flex>
@@ -244,76 +273,88 @@ const Consulta: NextPage = () => {
       </Head>
       <MainTemplate pathname={pathname}>
         <form onSubmit={formik.handleSubmit}>
-        <SimpleGrid
-          columns={[1, 1, 2, 2]}
-          alignItems={'top'}
-          pt={'48px'}
-          pb={{ base: '32px', md: '48px' }}
-          gap={{ base: '36px', md: '128px' }}
-        >
-          <Flex
-            alignItems={'center'}
-            width={'100%'}
-            flexDir={'column'}
-            justifySelf={'center'}
-            gap={{ base: '36px', md: '32px' }}
-            maxW={{ base: '100%', sm: '338px'}}
+          <SimpleGrid
+            columns={[1, 1, 2, 2]}
+            alignItems={'top'}
+            pt={'48px'}
+            pb={{ base: '32px', md: '48px' }}
+            gap={{ base: '36px', md: '128px' }}
           >
-            <Text
-              textStyle={{ base: 'heading2', md: 'heading3' }}
-              color={'primary.default'}
-              textAlign={'center'}
+            <Flex
+              alignItems={'center'}
+              width={'100%'}
+              flexDir={'column'}
+              justifySelf={'center'}
+              gap={{ base: '36px', md: '32px' }}
+              maxW={{ base: '100%', sm: '338px' }}
             >
-              respire.<br/>se concentre.<br/>deixe a intuição fluir.
-            </Text>
-            <Flex w={'100%'} h={'100%'}>
-              <Box
-                w="100%"
-                h={'376px'}
-                maxH={'376px'}
-                bgColor="primary.default"
-                borderRadius="8px"
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                position="relative"
-                _hover={{
-                  cursor: 'pointer',
-                }}
-                bgGradient={
-                  'linear-gradient(90deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.00) 100%, rgba(0, 0, 0, 0.00) 100%), #73086C'
-                }
-                p={'12px'}
+              <Text
+                textStyle={{ base: 'heading2', md: 'heading3' }}
+                color={'primary.default'}
+                textAlign={'center'}
               >
+                respire.
+                <br />
+                se concentre.
+                <br />
+                deixe a intuição fluir.
+              </Text>
+              <Flex w={'100%'} h={'100%'}>
                 <Box
                   w="100%"
-                  h="100%"
-                  border="2px dashed"
-                  borderColor={'neutral.white'}
-                ></Box>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileChange}
-                  style={{
-                    opacity: 0,
-                    position: 'absolute',
-                    width: '100%',
-                    height: '100%',
-                    top: 0,
-                    left: 0,
+                  h={'376px'}
+                  maxH={'376px'}
+                  bgColor="primary.default"
+                  borderRadius="8px"
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="center"
+                  position="relative"
+                  _hover={{
                     cursor: 'pointer',
                   }}
-                />
-                <Text textStyle={'bodyLG'} color="neutral.white" position="absolute" maxW={'160px'} textAlign={'center'}>
-                  {file ? 'Imagem importada com sucesso!' : 'Importar imagem da tiragem'}
-                </Text>
-                <Box position={'absolute'} mt="24px" top="50%">
-                  {!file && <ArrowUpIcon />}
+                  bgGradient={
+                    'linear-gradient(90deg, rgba(0, 0, 0, 0.20) 0%, rgba(0, 0, 0, 0.00) 100%, rgba(0, 0, 0, 0.00) 100%), #73086C'
+                  }
+                  p={'12px'}
+                >
+                  <Box
+                    w="100%"
+                    h="100%"
+                    border="2px dashed"
+                    borderColor={'neutral.white'}
+                  ></Box>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    style={{
+                      opacity: 0,
+                      position: 'absolute',
+                      width: '100%',
+                      height: '100%',
+                      top: 0,
+                      left: 0,
+                      cursor: 'pointer',
+                    }}
+                  />
+                  <Text
+                    textStyle={'bodyLG'}
+                    color="neutral.white"
+                    position="absolute"
+                    maxW={'160px'}
+                    textAlign={'center'}
+                  >
+                    {file
+                      ? 'Imagem importada com sucesso!'
+                      : 'Importar imagem da tiragem'}
+                  </Text>
+                  <Box position={'absolute'} mt="24px" top="50%">
+                    {!file && <ArrowUpIcon />}
+                  </Box>
                 </Box>
-              </Box>
+              </Flex>
             </Flex>
-          </Flex>
             <Flex flexDir={'column'} gap={'24px'}>
               <Textarea
                 label={'Resumo da Consulta'}
@@ -321,7 +362,9 @@ const Consulta: NextPage = () => {
                 labelVariant={'bgLight'}
                 variant={'outline'}
                 errorText={
-                  formik.touched.spreadOverview ? formik.errors.spreadOverview : undefined
+                  formik.touched.spreadOverview
+                    ? formik.errors.spreadOverview
+                    : undefined
                 }
                 {...formik.getFieldProps('spreadOverview')}
               />
@@ -336,7 +379,9 @@ const Consulta: NextPage = () => {
                 w={'100%'}
                 type="number"
                 errorText={
-                  formik.touched.cardsNumber ? formik.errors.cardsNumber : undefined
+                  formik.touched.cardsNumber
+                    ? formik.errors.cardsNumber
+                    : undefined
                 }
                 {...formik.getFieldProps('cardsNumber')}
               />
@@ -349,10 +394,15 @@ const Consulta: NextPage = () => {
                 >
                   Gerar PDF
                 </Button>
-                <PDFModal email={spreadInfo.consultantEmail} pdfBlob={pdfBlob} isOpen={isOpen} onClose={() => setIsOpen(false)} />
+                <PDFModal
+                  email={spreadInfo.consultantEmail}
+                  pdfBlob={pdfBlob}
+                  isOpen={isOpen}
+                  onClose={() => setIsOpen(false)}
+                />
               </Flex>
             </Flex>
-        </SimpleGrid>
+          </SimpleGrid>
         </form>
       </MainTemplate>
     </Flex>

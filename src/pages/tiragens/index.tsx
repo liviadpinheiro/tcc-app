@@ -20,7 +20,7 @@ const validationSchema = yup.object().shape({
     .date()
     .max(new Date(), 'A data de nascimento não pode ser no futuro')
     .required('A data de nascimento é obrigatória'),
-    consultantEmail: yup
+  consultantEmail: yup
     .string()
     .email('E-mail inválido')
     .required('O e-mail do consulente é obrigatório'),
@@ -124,7 +124,9 @@ const Spread: NextPage<{ decks: IDeck[] }> = ({ decks }) => {
                   labelVariant={'bgDark'}
                   w={'100%'}
                   errorText={
-                    formik.touched.consultantName ? formik.errors.consultantName : undefined
+                    formik.touched.consultantName
+                      ? formik.errors.consultantName
+                      : undefined
                   }
                   {...formik.getFieldProps('consultantName')}
                 />
@@ -135,7 +137,9 @@ const Spread: NextPage<{ decks: IDeck[] }> = ({ decks }) => {
                   labelVariant={'bgDark'}
                   type={'date'}
                   errorText={
-                    formik.touched.consultantBirthdate ? formik.errors.consultantBirthdate : undefined
+                    formik.touched.consultantBirthdate
+                      ? formik.errors.consultantBirthdate
+                      : undefined
                   }
                   {...formik.getFieldProps('consultantBirthdate')}
                 />
@@ -146,7 +150,9 @@ const Spread: NextPage<{ decks: IDeck[] }> = ({ decks }) => {
                   labelVariant={'bgDark'}
                   w={'100%'}
                   errorText={
-                    formik.touched.consultantEmail ? formik.errors.consultantEmail : undefined
+                    formik.touched.consultantEmail
+                      ? formik.errors.consultantEmail
+                      : undefined
                   }
                   {...formik.getFieldProps('consultantEmail')}
                 />
@@ -159,9 +165,11 @@ const Spread: NextPage<{ decks: IDeck[] }> = ({ decks }) => {
                   }
                   {...formik.getFieldProps('deck')}
                 >
-                  {decks.map(deck =>
-                    <option key={deck.id} value={deck.name}>{deck.name}</option>
-                  )}
+                  {decks.map((deck) => (
+                    <option key={deck.id} value={deck.name}>
+                      {deck.name}
+                    </option>
+                  ))}
                 </Select>
                 <Input
                   label={'Tema da consulta'}
@@ -186,7 +194,12 @@ const Spread: NextPage<{ decks: IDeck[] }> = ({ decks }) => {
                   {...formik.getFieldProps('spread')}
                 />
                 <Flex>
-                  <Button type={'submit'} w={'fit-content'} alignSelf={'left'} variant="rounded">
+                  <Button
+                    type={'submit'}
+                    w={'fit-content'}
+                    alignSelf={'left'}
+                    variant="rounded"
+                  >
                     {token ? 'Enviar' : 'Criar conta'}
                   </Button>
                 </Flex>

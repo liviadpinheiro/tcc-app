@@ -67,7 +67,7 @@ const Cards: NextPage<{ cards: ICard[] }> = ({ cards }) => {
               return (
                 <Box
                   position="relative"
-                  h="90px"
+                  minH={{ base: '116px', sm: '90px' }}
                   w="100%"
                   rounded="8px"
                   overflow="hidden"
@@ -93,7 +93,7 @@ const Cards: NextPage<{ cards: ICard[] }> = ({ cards }) => {
                     p={{ base: '16px', md: '24px' }}
                     gap={'16px'}
                     flexDir={{ base: 'column', sm: 'row' }}
-                    alignItems={'center'}
+                    alignItems={{ base: 'left', sm: 'center' }}
                     justifyContent={'space-between'}
                   >
                     <Text textStyle={'heading3'} color={'neutral.white'}>

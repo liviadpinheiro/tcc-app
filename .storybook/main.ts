@@ -40,6 +40,8 @@ const config: StorybookConfig = {
       '/assets': path.resolve(__dirname, '../public/assets'),
     }
     config.resolve.fallback = {
+      ...config.resolve.fallback,
+      fs: false,
       querystring: false,
       path: false,
     }
