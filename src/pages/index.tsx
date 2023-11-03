@@ -145,8 +145,8 @@ const Home: NextPage<{ testimonials: ITestimonial[] }> = ({ testimonials }) => {
           >
             {testimonials.map(({ name, state, message, id }) => (
               <Testimonial
-                state={name}
-                name={state}
+                state={state}
+                name={name}
                 testimonial={`"${message}"`}
                 key={id}
               />
